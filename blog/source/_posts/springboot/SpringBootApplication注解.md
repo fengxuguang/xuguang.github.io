@@ -1,10 +1,11 @@
 ---
 title: SpringBootApplication注解
-date: 2024-02-08 17:58:05
 tags:
   - springboot
 categories:
   - springboot
+abbrlink: b1e2d9f1
+date: 2024-02-08 17:58:05
 ---
 
 ## SpringBootApplication 注解

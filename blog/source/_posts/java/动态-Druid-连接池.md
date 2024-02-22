@@ -1,10 +1,13 @@
 ---
 title: 动态 Druid 连接池
-date: 2024-02-07 14:56:47
-tags: [java]
-categories: [java]
-thumbnail: "/images/home.jpg"
+tags:
+  - java
+categories:
+  - java
+thumbnail: /images/home.jpg
 sticky: 99
+abbrlink: ecd042ad
+date: 2024-02-07 14:56:47
 ---
 
 ## 动态 Druid 连接池

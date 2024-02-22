@@ -1,10 +1,11 @@
 ---
 title: Lombok语法
-date: 2024-02-08 21:27:04
 tags:
   - lombok
 categories:
   - lombok
+abbrlink: ee5b4d8
+date: 2024-02-08 21:27:04
 ---
 
 ## 依赖包

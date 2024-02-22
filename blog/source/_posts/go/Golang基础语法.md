@@ -1,10 +1,11 @@
 ---
 title: Golang基础语法
-date: 2024-02-08 21:30:01
 tags:
   - golang
 categories:
   - golang
+abbrlink: 3e97faf3
+date: 2024-02-08 21:30:01
 ---
 
 ## GO 基础语法

@@ -1,11 +1,12 @@
 ---
 title: JDK17新特性
-date: 2024-02-08 17:50:03
 tags:
   - java
   - jdk
 categories:
   - java
+abbrlink: 941e419f
+date: 2024-02-08 17:50:03
 ---
 
 ## 1. Java Record

@@ -1,10 +1,11 @@
 ---
 title: IDEA快捷键
-date: 2024-02-08 21:23:03
 tags:
   - idea
 categories:
   - idea
+abbrlink: 610bdf07
+date: 2024-02-08 21:23:03
 ---
 
 # 通用型
