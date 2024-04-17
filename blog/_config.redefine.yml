@@ -15,7 +15,7 @@ info:
   # Author name
   author: 冯旭光
   # Site URL
-  url: https://hexo.fengxuguang.top
+  url: https://blog.fengxuguang.top
 # BASIC INFORMATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -177,7 +177,8 @@ navbar:
   auto_hide: false
   # Navbar background color
   color:
-    left: "#f78736" #left side 
+    #left: "#f78736" #left side 导航栏颜色
+    left: "#367df7"
     right: "#367df7"  #right side
     transparency: 35 #percent (10-99)
   # Navbar width (usually no need to modify)
