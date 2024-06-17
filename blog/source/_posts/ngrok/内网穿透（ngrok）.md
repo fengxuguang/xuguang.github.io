@@ -1,8 +1,9 @@
 ---
 title: 内网穿透（ngrok）
-date: 2024-06-04 12:02:50
 tags:
   - ngrok
+abbrlink: 36bbd933
+date: 2024-06-04 12:02:50
 ---
 
 ## 一、ngrok 官网地址

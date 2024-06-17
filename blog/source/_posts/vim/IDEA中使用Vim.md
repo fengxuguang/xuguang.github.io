@@ -1,8 +1,9 @@
 ---
 title: IDEA中使用Vim
-date: 2024-05-30 10:38:15
 tags:
   - vim
+abbrlink: bc44723c
+date: 2024-05-30 10:38:15
 ---
 
 ## 一、IDea 中安装 Vim 插件
