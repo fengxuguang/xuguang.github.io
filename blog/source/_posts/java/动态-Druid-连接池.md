@@ -4,7 +4,7 @@ tags:
   - java
 categories:
   - java
-thumbnail: /images/home.jpg
+--thumbnail: /images/home.jpg
 sticky: 99
 abbrlink: ecd042ad
 date: 2024-02-07 14:56:47
