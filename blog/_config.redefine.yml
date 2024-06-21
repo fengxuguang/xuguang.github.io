@@ -35,7 +35,7 @@ defaults:
 # Docs: https://redefine-docs.ohevan.com/basic/colors
 colors:
   #Primary color
-  primary: "#A31F34"
+  primary: "#dab505"
   # Secondary color (TBD)
   secondary:
   # Default theme mode initial value (will be overwritten by prefer-color-scheme)
@@ -106,11 +106,12 @@ fontawesome: # Pro v6.2.1
 
 # HOME BANNER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/home/home_banner
+# 第一屏配置
 home_banner:
   # Whether to enable home banner
-  enable: true
+  enable: false
   # style of home banner
-  style: fixed # static or fixed
+  style: static # static or fixed
   # Home banner image
   image: 
     light: /images/home2.jpg # light mode
@@ -172,15 +173,16 @@ home_banner:
 
 # NAVIGATION BAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/home/navbar
+# 导航栏配置
 navbar:
   # Auto hide navbar
   auto_hide: false
   # Navbar background color
   color:
     #left: "#f78736" #left side 导航栏颜色
-    left: "#367df7"
-    right: "#367df7"  #right side
-    transparency: 35 #percent (10-99)
+    left: "#3f259b"
+    right: "#3f259b"  #right side
+    transparency: 80 #percent (10-99)
   # Navbar width (usually no need to modify)
   width:
     home: 1200px #home page
@@ -236,18 +238,19 @@ navbar:
 
 # HOME PAGE ARTICLE SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/home/home
+# 首页文章配置
 home:
   # Sidebar settings
   sidebar:
     enable: true # Whether to enable sidebar
     position: left # Sidebar position. left, right
     first_item: menu # First item in sidebar. menu, info
-    announcement: # Announcement text
+    announcement: 博客持续更新~ # Announcement text
     show_on_mobile: true # Whether to show sidebar navigation on mobile sheet menu
     links:
-      # Archives: 
-      #   path: /archives 
-      #   icon: fa-regular fa-archive # can be empty
+        Archives: 
+            path: /archives 
+            icon: fa-regular fa-archive # can be empty
       # Tags: 
       #   path: /tags 
       #   icon: fa-regular fa-tags # can be empty
@@ -270,6 +273,7 @@ home:
 
 # ARTICLE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/posts/articles
+# 文章样式配置
 articles:
   # Set the styles of the article
   style:
@@ -306,9 +310,11 @@ articles:
       family: # Font family
       url: # Font URL to CSS file
   # Table of contents settings
+  # 文章右侧目录配置
   toc:
     enable: true # Whether to enable TOC
-    max_depth: 3 # TOC depth
+    # 右侧目录层级
+    max_depth: 4 # TOC depth
     number: false # Whether to add number to TOC automatically
     expand: true # Whether to expand TOC
     init_open: true # Open toc by default
@@ -317,6 +323,7 @@ articles:
     enable: true # Whether to enable
     default: cc_by_nc_sa # Default license, can be cc_by_nc_sa, cc_by_nd, cc_by_nc, cc_by_sa, cc_by, all_rights_reserved, public_domain
   # Whether to enable lazyload for images
+  # 懒加载，图片多的博客里会加快页面加载
   lazyload: true
   # Article recommendation. Requires nodejieba (npm install nodejieba). Transplanted from hexo-theme-volantis.
   recommendation:
@@ -381,6 +388,7 @@ comment:
 
 # FOOTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/footer
+# 页脚配置
 footer:
   # Show website running time
   runtime: true # show website running time or not
@@ -424,13 +432,13 @@ plugins:
     enable: false # Whether to enable
   # Aplayer. See https://github.com/DIYgod/APlayer
   aplayer:
-    enable: false # Whether to enable
+    enable: true # Whether to enable
     type: fixed # fixed, mini
     audios:
-      - name: # audio name
-        artist: # audio artist
-        url: # audio url
-        cover: # audio cover url
+      - name: Dear Leslie # audio name
+        artist: 古巨基 # audio artist
+        url: /video/古巨基 - Dear Leslie.mp3 # audio url
+        cover: /video/1.jpeg # audio cover url
 #      - name: # audio name
 #        artist: # audio artist
 #        url: # audio url
@@ -449,7 +457,7 @@ page_templates:
   # Friend Links page column number
   friends_column: 2
   # Tags page style
-  tags_style: blur # blur, cloud
+  tags_style: cloud # blur, cloud
 # PAGE TEMPLATES <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -457,9 +465,9 @@ page_templates:
 # Docs: https://redefine-docs.ohevan.com/cdn
 cdn:
   # Whether to enable CDN
-  enable: false
+  enable: true
   # CDN Provider
-  provider: staticfile # staticfile, bootcdn, cdnjs, jsdelivr, unpkg, custom
+  provider: aliyun # staticfile, bootcdn, cdnjs, jsdelivr, unpkg, custom
   # Custom CDN URL
   # format example: https://cdn.custom.com/hexo-theme-redefine/${version}/source/${path}
   # The ${path} must be in the source folder of the theme
