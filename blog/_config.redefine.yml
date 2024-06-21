@@ -415,7 +415,7 @@ inject:
   enable: false
   # Inject custom head html code
   head: 
-    -
+    - <link rel="stylesheet" href="/css/custom.styl">
     -
   # Inject custom footer html code
   footer:
@@ -434,6 +434,11 @@ plugins:
   aplayer:
     enable: true # Whether to enable
     type: fixed # fixed, mini
+    mini: true
+    theme: '#dab505'
+    volume: 0.5
+    autoplay: true
+    listFolded: true
     audios:
       - name: Dear Leslie # audio name
         artist: 古巨基 # audio artist
