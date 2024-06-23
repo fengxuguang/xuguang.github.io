@@ -60,9 +60,11 @@ global:
       family:  # Font family
       url:  # Font URL to CSS file
   # Content max width
-  content_max_width: 1000px
+  # 文章内容最大宽度
+  content_max_width: 1200px
   # Sidebar width
-  sidebar_width: 210px
+  # 文章右侧侧边栏宽度
+  sidebar_width: 238px
   # Effects on mouse hover
   hover:
     shadow: true # shadow effect
@@ -112,7 +114,7 @@ home_banner:
   # Whether to enable home banner
   enable: true
   # style of home banner
-  style: fixed # static or fixed
+  style: static # static or fixed
   # Home banner image
   image: 
     light: /images/home2.jpg # light mode
@@ -181,8 +183,8 @@ navbar:
   # Navbar background color
   color:
     #left: "#f78736" #left side 导航栏颜色
-    # 湖人紫色
-    left: "#dab505"
+    # 湖人紫色 3f259b
+    left: "#3f259b"
     right: "#3f259b"  #right side
     transparency: 80 #percent (10-99)
   # Navbar width (usually no need to modify)
