@@ -1,8 +1,9 @@
 ---
 title: Mybatis源码分析-项目目录
-date: 2024-09-22 13:46:18
 tags:
   - mybatis
+abbrlink: 8f03cf8e
+date: 2024-09-22 13:46:18
 ---
 
 ## 1. 前言
