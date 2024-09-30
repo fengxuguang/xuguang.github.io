@@ -311,3 +311,5 @@ date: 2024-09-20 09:33:13
 
 
 **文章转载地址**：[简明VIM练级攻略](https://coolshell.cn/articles/5426.html)
+
+**原文地址**：[Learn Vim Progressively](https://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/)
