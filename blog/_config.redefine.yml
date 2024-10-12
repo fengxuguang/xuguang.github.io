@@ -365,7 +365,7 @@ comment:
     # Gitalk comment system. See https://github.com/gitalk/gitalk
     gitalk:
       clientID: 7155294f872e0ee349f7 # GitHub Application Client ID
-      clientSecret: be2e109a62c483b22d527ab42eb4e9d9595cf910 # GitHub Application Client Secret
+      clientSecret: 7298fd2636737cb5ef1bf2f76b08bfbfa1410f83 # GitHub Application Client Secret
       repo: xuguang.github.io # GitHub repository 仓库名称, 注意不是地址
       owner: fengxuguang # GitHub repository owner
       proxy: # GitHub repository proxy
