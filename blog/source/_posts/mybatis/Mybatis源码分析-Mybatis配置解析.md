@@ -1,8 +1,9 @@
 ---
 title: Mybatis源码分析-Mybatis配置解析
-date: 2024-11-01 15:46:37
 tags:
   - mybatis
+abbrlink: eefcce7c
+date: 2024-11-01 15:46:37
 ---
 
 ​	Mybatis 有两个核心配置，全局配置会影响 Mybatis 的执行；Mapper 配置定义了查询的 SQL，下面我们来看看 Mybatis 是如何加载配置文件的。
@@ -165,5 +166,84 @@ public Configuration() {
     languageRegistry.setDefaultDriverClass(XMLLanguageDriver.class);
     languageRegistry.register(RawLanguageDriver.class);
   }
+```
+
+Configuration 初始化完成类型别名的注册工作。
+
+#### 2.1.3 总结
+
+​	通过上述的分析可以看到 XMLConfiguration 完成了 XML 文件的解析对应 XPathParser 和 Configuration 对象的初始化操作，下面来看下 parse() 方法到底是如何解析配置文件的。
+
+### 2.2 配置文件解析
+
+​	XMLConfiguration#parse() 方法具体解析配置文件，最终将配置文件解析成 Configuration 对象。
+
+```java
+/**
+ * 将配置内容解析成 Configuration 对象并返回
+ * @return Configuration
+ */
+public Configuration parse() {
+    // 判断是否已经解析过, 若已经解析过了则抛出异常, 根据 parsed 变量的值判断是否已经完成了对 mybatis-confgi.xml 配置文件的解析
+    if (parsed) {
+        throw new BuilderException("Each XMLConfigBuilder can only be used once.");
+    }
+
+    // 解析标识设置为已解析
+    parsed = true;
+
+    // 在 mybatis-config.xml 配置文件中查找根节点 configuration 标签, 并开始解析
+    parseConfiguration(parser.evalNode("/configuration"));
+
+    // 返回解析
+    return configuration;
+}
+```
+
+解析全局配置文件 configuration 根标签下的内容，XMLConfiguration#parseConfiguration() 核心代码。
+
+```java
+/**
+   * 解析全局配置文件 configuration 根标签下的内容, XMLConfiguration#parseConfiguration() 方法
+   * @param root 根节点
+   */
+private void parseConfiguration(XNode root) {
+    try {
+        // issue #117 read properties first
+        // 解析 properties 标签元素
+        propertiesElement(root.evalNode("properties"));
+        // 解析 settings 标签元素
+        Properties settings = settingsAsProperties(root.evalNode("settings"));
+        // 文件读取
+        loadCustomVfsImpl(settings);
+        // 设置日志信息
+        loadCustomLogImpl(settings);
+        // 解析 typeAliases 标签元素
+        typeAliasesElement(root.evalNode("typeAliases"));
+        // 解析 plugins 标签元素, 插件
+        pluginsElement(root.evalNode("plugins"));
+        // 解析 objectFactory 标签元素, 对象工厂
+        objectFactoryElement(root.evalNode("objectFactory"));
+        // 解析 objectWrapperFactory 标签元素, 对象包装工厂
+        objectWrapperFactoryElement(root.evalNode("objectWrapperFactory"));
+        // 解析 reflectorFactory 标签元素, 反射工厂
+        reflectorFactoryElement(root.evalNode("reflectorFactory"));
+
+        // settings 子标签赋值, 若未配置, 使用默认值
+        settingsElement(settings);
+        // 解析 environments 标签元素, 数据库连接信息创建
+        // read it after objectFactory and objectWrapperFactory issue #631
+        environmentsElement(root.evalNode("environments"));
+        // 解析 databaseIdProvider 标签元素
+        databaseIdProviderElement(root.evalNode("databaseIdProvider"));
+        // 解析 typeHandlers 标签元素, 类型处理器
+        typeHandlersElement(root.evalNode("typeHandlers"));
+        // 解析 mappers 标签元素, mapper
+        mappersElement(root.evalNode("mappers"));
+    } catch (Exception e) {
+        // 解析 xml 配置失败, 抛出异常
+        throw new BuilderException("Error parsing SQL Mapper Configuration. Cause: " + e, e);
+    }
+}
 ```
 

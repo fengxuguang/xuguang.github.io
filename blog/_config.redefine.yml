@@ -22,8 +22,9 @@ info:
 # IMAGE CONFIGURATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 # Docs: https://redefine-docs.ohevan.com/basic/defaults
 defaults:
+  # 图标
   # Favicon
-  favicon: /images/avatar.jpg
+  favicon: /images/logo.jpg
   # Site logo
   logo: 
   # Site avatar
@@ -179,6 +180,7 @@ home_banner:
 # 导航栏配置
 navbar:
   # Auto hide navbar
+  # 滚动时是否隐藏导航栏
   auto_hide: false
   # Navbar background color
   color:
@@ -186,7 +188,7 @@ navbar:
     # 湖人紫色 3f259b
     left: "#3f259b"
     right: "#3f259b"  #right side
-    transparency: 80 #percent (10-99)
+    transparency: 99 #percent (10-99)
   # Navbar width (usually no need to modify)
   width:
     home: 1200px #home page
@@ -249,7 +251,7 @@ home:
     enable: true # Whether to enable sidebar
     position: left # Sidebar position. left, right
     first_item: menu # First item in sidebar. menu, info
-    announcement: 博客持续更新~ # Announcement text
+    announcement: 用代码编织梦想，用程序书写人生！ # Announcement text
     show_on_mobile: true # Whether to show sidebar navigation on mobile sheet menu
     #links:
     #    Archives: 
@@ -263,7 +265,7 @@ home:
       #   icon: fa-regular fa-folder # can be empty
       # ...... # you can add more
   # Article date format
-  article_date_format: auto # auto, relative, YYYY-MM-DD, YYYY-MM-DD HH:mm:ss etc.
+  article_date_format: YYYY-MM-DD HH:mm:ss # auto, relative, YYYY-MM-DD, YYYY-MM-DD HH:mm:ss etc.
   # Article categories visibility
   categories:
     enable: true  # Whether to enable
