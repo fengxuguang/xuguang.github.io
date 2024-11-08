@@ -37,7 +37,7 @@ defaults:
 colors:
   #Primary color
   # 湖人金色
-  primary: "#dab505"
+  primary: "#FCBC2C"
   # Secondary color (TBD)
   secondary:
   # Default theme mode initial value (will be overwritten by prefer-color-scheme)
@@ -186,9 +186,9 @@ navbar:
   # Navbar background color
   color:
     #left: "#f78736" #left side 导航栏颜色
-    # 湖人紫色 3f259b
-    left: "#3f259b"
-    right: "#3f259b"  #right side
+    # 湖人紫色 542484
+    left: "#542484"
+    right: "#542484"  #right side
     transparency: 99 #percent (10-99)
   # Navbar width (usually no need to modify)
   width:
@@ -442,7 +442,7 @@ plugins:
     enable: true # Whether to enable
     type: fixed # fixed, mini
     mini: true
-    theme: '#dab505'
+    theme: '#FCBC2C'
     volume: 0.5
     autoplay: true
     listFolded: true
