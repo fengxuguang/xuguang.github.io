@@ -84,7 +84,8 @@ global:
   # Whether to enable single page experience (using swup). See https://swup.js.org/. similar to pjax
   single_page: true
   # Whether to enable Preloader.
-  preloader: true
+  # true 时访问博客会加载两次空白博客名界面
+  preloader: false
   # Whether to enable open graph
   open_graph: true
   # Google Analytics
@@ -188,7 +189,7 @@ navbar:
     #left: "#f78736" #left side 导航栏颜色
     # 湖人紫色 542484
     left: "#542484"
-    right: "#542484"  #right side
+    right: "#FCBC2C"  #right side
     transparency: 99 #percent (10-99)
   # Navbar width (usually no need to modify)
   width:
