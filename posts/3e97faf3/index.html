@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="冯旭光">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://blog.fengxuguang.top/posts/3e97faf3/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="GO 基础语法go 关键字go 语言中一共有 25 个关键字。 1234break default func interface select case defergo map struct chan else goto package switchconst fallthrough if range type continue forimport return var  go 数据类型定义 va">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang基础语法">
+<meta property="og:url" content="https://blog.fengxuguang.top/posts/3e97faf3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="GO 基础语法go 关键字go 语言中一共有 25 个关键字。 1234break default func interface select case defergo map struct chan else goto package switchconst fallthrough if range type continue forimport return var  go 数据类型定义 va">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-08T13:30:01.000Z">
+<meta property="article:modified_time" content="2025-03-11T06:43:46.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="golang">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/logo2.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/logo2.png">
+    <meta name="theme-color" content="#FCBC2C">
+    <link rel="shortcut icon" href="/images/logo2.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Golang基础语法 -
+        
+        冯旭光的博客
+    </title>
+
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fonts/fonts.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fonts/Satoshi/satoshi.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"blog.fengxuguang.top","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":4,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#FCBC2C","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1200px","sidebar_width":"238px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":false,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/Lakers.png","dark":"/images/home.jpg"},"title":"阿飞程序员修炼之路！","subtitle":{"text":["愿你如风，被人温柔以待！","用心码好每一行代码！"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/fengxuguang","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":true,"type":"fixed","audios":[{"name":"Dear Leslie","artist":"古巨基","url":"/video/古巨基 - Dear Leslie.mp3","cover":"/video/1.jpeg"}],"mini":true,"theme":"#FCBC2C","volume":0.5,"autoplay":true,"listFolded":true},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#542484","right":"#FCBC2C","transparency":99},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags/","icon":"fa-solid fa-tag"},"GitHub":{"path":"https://github.com/fengxuguang","icon":"fa-brands fa-github"}},"search":{"enable":true,"preload":true},"tags":{"标签":{"icon":"fa-solid fa-tags","path":"/tags/"}},"categories":{"分类":{"icon":"fa-solid fa-folder","path":"/categories/"}}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"用代码编织梦想，用程序书写人生！","show_on_mobile":true,"links":null},"article_date_format":"YYYY-MM-DD HH:mm:ss","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/2/1 07:23:14"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                冯旭光的博客
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags/"
+                                        >
+                                    <i class="fa-solid fa-tag fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   target="_blank" rel="noopener" href="https://github.com/fengxuguang"
+                                        >
+                                    <i class="fa-brands fa-github fa-fw"></i>
+                                    GITHUB
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags/"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-solid fa-tag fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           target="_blank" rel="noopener" href="https://github.com/fengxuguang"
+                        >
+                            <span>
+                                GITHUB
+                            </span>
+                            
+                                <i class="fa-brands fa-github fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">25</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">13</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">41</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">Golang基础语法</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/avatar.jpg">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">冯旭光</span>
+                        
+                            <span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-02-08 21:30:01</span>
+        <span class="mobile">2024-02-08 21:30:01</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-03-11 14:43:46</span>
+            <span class="mobile">2025-03-11 14:43:46</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/golang/">golang</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/golang/">golang</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>3.1k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>12 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h2 id="GO-基础语法"><a href="#GO-基础语法" class="headerlink" title="GO 基础语法"></a>GO 基础语法</h2><h3 id="go-关键字"><a href="#go-关键字" class="headerlink" title="go 关键字"></a>go 关键字</h3><p>go 语言中一共有 25 个关键字。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">break</span> <span class="keyword">default</span> <span class="function"><span class="keyword">func</span> <span class="title">interface</span> <span class="title">select</span> <span class="title">case</span> <span class="title">defer</span></span></span><br><span class="line"><span class="keyword">go</span> <span class="keyword">map</span> <span class="keyword">struct</span> <span class="keyword">chan</span> <span class="keyword">else</span> <span class="keyword">goto</span> <span class="keyword">package</span> <span class="keyword">switch</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">fallthrough</span> <span class="keyword">if</span> <span class="keyword">range</span> <span class="keyword">type</span> <span class="keyword">continue</span> <span class="keyword">for</span></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">return</span> <span class="keyword">var</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="go-数据类型定义"><a href="#go-数据类型定义" class="headerlink" title="go 数据类型定义"></a>go 数据类型定义</h3><ol>
+<li><code>var</code>声明定义一个变量，定义后，值可修改</li>
+<li><code>const</code>声明定义一个变量，定义后，值不可修改</li>
+<li><code>:=</code>定义一个变量，类型由后面的值觉得。<strong>常用定义方式</strong></li>
+</ol>
+<h3 id="go-数据类型"><a href="#go-数据类型" class="headerlink" title="go 数据类型"></a>go 数据类型</h3><p><strong>go数据类型主要分为两类：基本数据类型和派生数据类型</strong></p>
+<h4 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h4><p>整型、浮点型、字符串、布尔型、字符型</p>
+<h5 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h5><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">类型：int8、int16、int32、int64、uint8、uint16、uint32、uint64、byte</span><br><span class="line">长度说明：位即是一个二进制位，8 即2^8=256，如果是有符号则需要一位作为符号位</span><br><span class="line"></span><br><span class="line">整型：分为有符号和无符号。无符号即有符号前加多个 u</span><br><span class="line">例如：有符号8位 int8、无符号8位 uint8</span><br></pre></td></tr></table></figure></div>
+
+<h5 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h5><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>范围</td>
+<td>32位、64位</td>
+</tr>
+</tbody></table>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">浮点型只有两种类型，float32 和 float64，默认：64，64位更加精准</span><br></pre></td></tr></table></figure></div>
+
+<p>PS：底层存储空间和操作系统无关</p>
+<p>PS：浮点类型底层存储：符号位 + 指数位 + 尾数位，所以尾数位只是存了一个大概，很可能出现精度的丢失。</p>
+<h5 id="字符和字符串"><a href="#字符和字符串" class="headerlink" title="字符和字符串"></a>字符和字符串</h5><p>字符串就是一串固定长度的字符连接起来的字符序列。Go 的字符串是由单个字节连接起来的，也就是说对于传统的字符串是由字符组成的，而 Go 的字符串是由字节组成的。</p>
+<ol>
+<li><p>字符使用单引号定义字符，字符定义后无法修改</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> word <span class="type">byte</span> = <span class="string">&#x27;a&#x27;</span></span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>字符串可以用双引号和反引号定义，字符串定义后可修改</p>
+<p>双引号会解析特殊字符，如 \n 或 \r 等，反引号直接原样处理。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> word <span class="type">string</span> = <span class="string">&quot;hello \n world&quot;</span></span><br><span class="line"><span class="keyword">var</span> word2 <span class="type">string</span> = <span class="string">`hello \n world`</span></span><br></pre></td></tr></table></figure></div></li>
+</ol>
+<h5 id="基本数据类型相互转换"><a href="#基本数据类型相互转换" class="headerlink" title="基本数据类型相互转换"></a>基本数据类型相互转换</h5><p>Golang 和 Java&#x2F;C 不同，Golang 在不同类型的变量之间赋值时<strong>需要显示转换</strong>。也就是 Golang 中数据类型<strong>不能自动转换</strong>。</p>
+<p><strong>基本语法：</strong></p>
+<ul>
+<li>表达式 <code>T(v)</code>将值 v 转换为类型 T</li>
+</ul>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num <span class="type">int</span> = <span class="number">100</span></span><br><span class="line"><span class="comment">// 转浮点型</span></span><br><span class="line"><span class="keyword">var</span> float <span class="type">float64</span> = <span class="type">float64</span>(num)</span><br><span class="line"><span class="comment">// 转整型无符号8位</span></span><br><span class="line"><span class="keyword">var</span> ui <span class="type">uint8</span> = <span class="type">uint8</span>(num)</span><br><span class="line">fmt.Println(num, float, ui)</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>其他类型转字符串</strong></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式一（推荐）</span></span><br><span class="line"><span class="keyword">var</span> num <span class="type">int</span> = <span class="number">23</span></span><br><span class="line"><span class="keyword">var</span> n2 <span class="type">float32</span> = <span class="number">3.14</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s1 <span class="type">string</span> = fmt.Sprintf(<span class="string">&quot;%d&quot;</span>, num)</span><br><span class="line">fmt.Println(s1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s2 <span class="type">string</span> = fmt.Sprintf(<span class="string">&quot;%f&quot;</span>, n2)</span><br><span class="line">fmt.Println(s2)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二</span></span><br><span class="line"><span class="keyword">var</span> num <span class="type">int</span> = <span class="number">99</span></span><br><span class="line"><span class="keyword">var</span> num2 <span class="type">float64</span> = <span class="number">23.456</span></span><br><span class="line"><span class="keyword">var</span> isTrue <span class="type">bool</span> = <span class="literal">true</span></span><br><span class="line"><span class="keyword">var</span> str <span class="type">string</span> = strconv.FormatInt(<span class="type">int64</span>(num), <span class="number">10</span>)</span><br><span class="line">fmt.Println(str)</span><br><span class="line"></span><br><span class="line">str = strconv.FormatFloat(num2, <span class="string">&#x27;f&#x27;</span>, <span class="number">10</span>, <span class="number">64</span>)</span><br><span class="line">fmt.Println(str)</span><br><span class="line"></span><br><span class="line">str = strconv.FormatBool(isTrue)</span><br><span class="line">fmt.Println(str)</span><br></pre></td></tr></table></figure></div>
+
+<h4 id="派生数据类型"><a href="#派生数据类型" class="headerlink" title="派生数据类型"></a>派生数据类型</h4><p>指针、数组、切片、函数、map、结构体、通道、接口</p>
+<h5 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h5><p>指针保存变量在内存中的地址，与 C 类似，类似 Java 中的引用</p>
+<ol>
+<li>用<code>*类型</code>来定义指针变量，对于指针变量，可以用<code>*变量名</code>来获取内存地址指向的值</li>
+<li>&amp; 用来获取变量的地址</li>
+</ol>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a := <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> num *<span class="type">int</span> = &amp;a</span><br><span class="line">fmt.Println(*num)</span><br></pre></td></tr></table></figure></div>
+
+<h5 id="map"><a href="#map" class="headerlink" title="map"></a>map</h5><p>map 是一种无序的基于 key-value 的数据结构，Go 语言中的 map 是引用类型，必须初始化才能使用。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 需要使用 make() 方法初始化 map</span></span><br><span class="line">	<span class="keyword">var</span> gomap = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span>)</span><br><span class="line">	<span class="comment">// 添加</span></span><br><span class="line">	gomap[<span class="number">1</span>] = <span class="type">string</span>(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">	gomap[<span class="number">2</span>]= <span class="type">string</span>(<span class="string">&quot;golang&quot;</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 遍历</span></span><br><span class="line">	<span class="keyword">for</span> key,value := <span class="keyword">range</span> gomap &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;index: %v, value: %v \n&quot;</span>, key, value)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">&quot;---------------------&quot;</span>)</span><br><span class="line">	<span class="comment">// 删除</span></span><br><span class="line">	<span class="built_in">delete</span>(gomap, <span class="number">1</span>)</span><br><span class="line">	<span class="comment">// 遍历</span></span><br><span class="line">	<span class="keyword">for</span> key,value := <span class="keyword">range</span> gomap &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;index: %v, value: %v \n&quot;</span>, key, value)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h5 id="数组与切片"><a href="#数组与切片" class="headerlink" title="数组与切片"></a>数组与切片</h5><p><strong>数组：</strong>go 数组与 C 相似。需要定义数组类型，和数组长度。数组长度定义后不能修改。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> intArr [<span class="number">4</span>]<span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> strArr [<span class="number">2</span>]<span class="type">string</span></span><br><span class="line">	<span class="keyword">var</span> arr = [...]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">	<span class="keyword">var</span> doubleArr = [...][<span class="number">2</span>]<span class="type">int</span>&#123;&#123;<span class="number">1</span>, <span class="number">2</span>&#125;, &#123;<span class="number">3</span>, <span class="number">4</span>&#125;&#125;</span><br><span class="line">	</span><br><span class="line">	fmt.Println(intArr)</span><br><span class="line">	fmt.Println(strArr)</span><br><span class="line">	fmt.Println(arr)</span><br><span class="line">	fmt.Println(doubleArr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>切片（Slice）：</strong>在<code>GO</code>语言中，数组是一个固定长度的序列，而切片则是一个可变长度的序列。切片是建立在数组之上的，它提供了<code>动态数组</code>的功能，可以根据需要动态地增加或缩小切片的长度。与数组相比切片的长度是不固定的，可以追加元素，在追加时可能使切片的容量增大。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> s []<span class="type">int</span></span><br><span class="line">	s1 := []<span class="type">int</span> &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	</span><br><span class="line">	fmt.Println(s)</span><br><span class="line">	fmt.Println(s1)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>还可以使用<code>make</code>函数来创建一个指定长度和容量的切片。</p>
+<p><code>make</code>的第一个参数为切片类型；第二个参数为切片长度（即实际存储的元素个数）；第三个参数为切片容量，该参数为可选参数，如果为空则值默认为切片长度。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 创建一个长度为 3、容量为 5 的整型切片</span></span><br><span class="line">	slice := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">	<span class="comment">// 创建一个长度为 3、容量为 3 的字符串切片</span></span><br><span class="line">	slice2 := <span class="built_in">make</span>([]<span class="type">string</span>, <span class="number">3</span>)</span><br><span class="line">	</span><br><span class="line">	fmt.Println(slice)</span><br><span class="line">	fmt.Println(slice2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>还可以直接通过数组或切片来创建一个新的切片，新切片的长度等于从原始数组或切片中指定的开始和结束索引之间的元素个数，容量等于原始数组或切片的长度减去开始索引（<code>s := arr[startIndex:endIndex]</code>）。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">arr := [<span class="number">5</span>]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"><span class="comment">// 创建一个从 arr[1] 开始到 arr[4] 结束的切片</span></span><br><span class="line">slice3 := arr[<span class="number">1</span>:<span class="number">4</span>]</span><br><span class="line"><span class="comment">// 创建一个新切片，容量等于原始切片的长度</span></span><br><span class="line">slice4 := slice3[:]</span><br></pre></td></tr></table></figure></div>
+
+<p>**注意：**当直接从另一个切片创建一个新切片时，两个切片将**共享相同的底层数组**。因此，修改一个切片的元素也会影响到另一个切片。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">arr := [<span class="number">5</span>]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"><span class="comment">// 创建一个从 arr[1] 开始到 arr[4] 结束的切片</span></span><br><span class="line">slice3 := arr[<span class="number">1</span>:<span class="number">4</span>]</span><br><span class="line"><span class="comment">// 创建一个新切片，容量等于原始切片的长度</span></span><br><span class="line">slice4 := slice3[:]</span><br><span class="line">slice3[<span class="number">2</span>] = <span class="number">6</span></span><br><span class="line"></span><br><span class="line">fmt.Println(slice3)</span><br><span class="line">fmt.Println(slice4)</span><br><span class="line">fmt.Println(arr)</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>切片追加元素</strong></p>
+<p>使用内置的<code>append</code>函数向切片中追加元素，如果切片的容量不够，则会自动扩容。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个空的切片</span></span><br><span class="line"><span class="keyword">var</span> slice6 []<span class="type">int</span></span><br><span class="line"><span class="comment">// 向切片中追加元素</span></span><br><span class="line">slice6 = <span class="built_in">append</span>(slice6, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line">fmt.Println(slice6)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向切片中追加元素</span></span><br><span class="line">slice6 = <span class="built_in">append</span>(slice6, <span class="number">9</span>)</span><br><span class="line">fmt.Println(slice6)</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>切片遍历</strong></p>
+<p>可以使用<code>for</code>循环或者和<code>for - range</code>关键字来遍历切片中的元素。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">arr := [<span class="number">5</span>]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;------ for i ----&quot;</span>)</span><br><span class="line"><span class="comment">// for 循环遍历切片</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(arr); i ++ &#123;</span><br><span class="line">    <span class="built_in">println</span>(arr[i])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;---------- for range ------&quot;</span>)</span><br><span class="line"><span class="comment">// for range 遍历切片</span></span><br><span class="line"><span class="keyword">for</span> key, value := <span class="keyword">range</span> arr &#123;</span><br><span class="line">    <span class="built_in">println</span>(key, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>切片复制</strong></p>
+<p>可以使用内置<code>copy</code>函数将一个切片中的元素复制到另一个切片中。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">slice6 := [<span class="number">5</span>]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"><span class="comment">// 创建一个包含 3 个元素的整数数组</span></span><br><span class="line">slice7 := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line"><span class="comment">// 将 slice6 中的元素复制到 slice7 中</span></span><br><span class="line"><span class="built_in">copy</span>(slice7, slice6)</span><br><span class="line">fmt.Println(slice7)</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>切片排序</strong></p>
+<p>可以使用<code>sort</code>包中的函数对切片进行排序。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sortArr := []<span class="type">int</span>&#123;<span class="number">3</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">1</span>&#125;</span><br><span class="line">sort.Ints(sortArr)</span><br><span class="line">fmt.Println(sortArr)</span><br></pre></td></tr></table></figure></div>
+
+<h5 id="结构体和面向对象"><a href="#结构体和面向对象" class="headerlink" title="结构体和面向对象"></a>结构体和面向对象</h5><p>Go 中没有“类”的概念，也不支持“类”的继承和面向对象的概念。GO 语言中通过结构体的内嵌在配合接口比面向对象有更高的扩展性和灵活性。</p>
+<p><strong>结构体定义</strong></p>
+<p>结构体中字段大写开头表示公开访问，小写表示私有（仅在定义当前结构体的包中可访问）</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> &lt;类型名&gt; <span class="keyword">struct</span> &#123;</span><br><span class="line">    字段名 字段类型</span><br><span class="line">    字段名 字段类型</span><br><span class="line">    字段名 字段类型</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>通过<code>.</code>号访问结构体属性（与 C 类似）</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> user <span class="keyword">struct</span> &#123;</span><br><span class="line">    name <span class="type">string</span></span><br><span class="line">    age <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	user := user&#123;<span class="string">&quot;fly&quot;</span>, <span class="number">18</span>&#125;</span><br><span class="line">	fmt.Println(user.name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>结构体实例化方式</strong></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 键值对初始化</span></span><br><span class="line">user2 := &amp;user &#123;name: <span class="string">&quot;fly2&quot;</span>, age: <span class="number">22</span>&#125;</span><br><span class="line">fmt.Println(user2.name)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 值列表</span></span><br><span class="line">user3 := &amp;user&#123;<span class="string">&quot;fly3&quot;</span>, <span class="number">23</span>&#125;</span><br><span class="line">fmt.Println(user3)</span><br><span class="line"></span><br><span class="line"><span class="comment">// new 关键字</span></span><br><span class="line">user4 := <span class="built_in">new</span>(user)</span><br><span class="line">user4.name = <span class="string">&quot;fly4&quot;</span></span><br><span class="line">fmt.Println(user4.name)</span><br></pre></td></tr></table></figure></div>
+
+<h5 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h5><p>语法格式</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type &lt;类型名&gt; 类型描述</span><br><span class="line">type ui8 = uint8</span><br><span class="line">// 定义结构体变量</span><br><span class="line">var i ui8 = 1</span><br><span class="line">fmt.Println(i)</span><br></pre></td></tr></table></figure></div>
+
+<h5 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h5><p><strong>什么是标识符？</strong></p>
+<p> 变量，方法等，只要是起名字的地方，那个名字就是标识符</p>
+<p><strong>标识符定义规则：</strong></p>
+<ol>
+<li><p>三个可以（组成部分）：数字、字母、下划线</p>
+</li>
+<li><p>四个注意：</p>
+<ol>
+<li>不可以以数字开头</li>
+<li>严格区分大小写</li>
+<li>不能包含空格</li>
+<li>不可以使用 GO 中的保留关键字</li>
+</ol>
+</li>
+<li><p>见名知意：增加可读性</p>
+</li>
+<li><p>下划线”_”本身在 GO 中是一个特殊的标识符，称为空标识符。可以代表任何其他的标识符，但是它对应的值会被忽略（比如：忽略某个返回值）。所以仅能被作为占位符使用，不能单独作为标识符使用。</p>
+</li>
+<li><p>可以用如下形式，但是不建议：var int int &#x3D; 10 (int, float32, float64 等不算是保留关键字，但是也尽量不要使用)</p>
+</li>
+<li><p>长度无限制，但是不建议太长</p>
+</li>
+<li><p>起名规则</p>
+<ol>
+<li><p>包名：尽量保持 package 的名字和目录保持一致，尽量采取有意义的包名，简短，有意义，不要和标准库冲突</p>
+<ul>
+<li>为什么之前在定义源文件的时候，一般我们都用 package main 包？</li>
+</ul>
+<p>main 包是一个程序的入口包，所以 main 函数它所在的包建议定义为 main 包，如果不定义为 main 包，那么就不能得到可执行文件。</p>
+<ul>
+<li>尽量保持 package 的名字和目录保持一致</li>
+<li>和标准库不要冲突</li>
+</ul>
+</li>
+<li><p>变量名、函数名、常量名：采用<code>驼峰命名法</code></p>
+</li>
+<li><p>如果变量名、函数名、常量名首字母大写，则可以被其他的包访问；如果首字母小写，则只能在本包中使用</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>import 导入语句通常放在文件开头包声明语句的下面。</li>
+<li>导入的包名需要使用双引号包裹起来。</li>
+<li>包名是从 $GOPATH&#x2F;src&#x2F; 开始计算的，使用 &#x2F; 进行路径分隔。</li>
+</ol>
+<p>需要配置一个环境变量：GOPATH</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>定义：对特定的功能进行提取，形成一个代码片段，这个代码片段就是我们所说的函数</p>
+<p>作用：提高代码的复用性</p>
+<p>基本语法</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> 函数名<span class="params">(形参列表)</span></span> (返回值类型列表) &#123;</span><br><span class="line">    <span class="keyword">return</span> 返回值列表</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>（1）函数名：</p>
+<ul>
+<li>遵循标识符命名规范：见名知意，驼峰命名</li>
+<li>首字母不能是数字</li>
+<li>首字母大写该函数可以被本包文件和其他包文件使用（类似 public）</li>
+<li>首字母小写只能被本包文件使用，其他包文件不能使用（类似 private）</li>
+</ul>
+<p>（2）形参列表</p>
+<p> 形参列表：个数：可以是一个参数，可以是 n 个参数，可以是 0 个参数</p>
+<p> 形式参数列表：作用：接收外来的数据</p>
+<p> 实际参数：实际的数据</p>
+<p>（3）返回值类型列表</p>
+<p>个数：可以 0 个，1 个或者多个</p>
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><h4 id="错误处理-捕获机制"><a href="#错误处理-捕获机制" class="headerlink" title="错误处理&#x2F;捕获机制"></a>错误处理&#x2F;捕获机制</h4><p>go 中追求代码优雅，引入机制：defer + recover 机制处理错误</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	test()</span><br><span class="line">	fmt.Println(<span class="string">&quot;finish!&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 利用 defer + recover 来捕获错误</span></span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// 调用 recover 内置函数, 可以捕获错误</span></span><br><span class="line">		err := <span class="built_in">recover</span>()</span><br><span class="line">		<span class="comment">// 如果没有捕获错误, 返回值为零值: nil</span></span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;错误已经捕获&quot;</span>)</span><br><span class="line">			fmt.Println(<span class="string">&quot;err是：&quot;</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line">	num1 := <span class="number">10</span></span><br><span class="line">	num2 := <span class="number">0</span></span><br><span class="line">	result := num1 / num2</span><br><span class="line">	fmt.Println(result)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>优点：提高程序健壮性</p>
+<h4 id="自定义错误"><a href="#自定义错误" class="headerlink" title="自定义错误"></a>自定义错误</h4><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;errors&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	err := test2(<span class="number">10</span>, <span class="number">0</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;自定义错误：&quot;</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">&quot;正常执行下面流程...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test2</span><span class="params">(num1 <span class="type">int</span>, num2 <span class="type">int</span>)</span></span> <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> num2 == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> errors.New(<span class="string">&quot;除数不能为0&quot;</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		result := num1 / num2</span><br><span class="line">		fmt.Println(result)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 实现的功能: 给出 5 个学生的成绩, 求出成绩的总和、平均数</span></span><br><span class="line">	arr()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">arr</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 初始化数组</span></span><br><span class="line">	<span class="keyword">var</span> score [<span class="number">5</span>]<span class="type">int</span></span><br><span class="line">	score[<span class="number">0</span>] = <span class="number">95</span></span><br><span class="line">	score[<span class="number">1</span>] = <span class="number">91</span></span><br><span class="line">	score[<span class="number">2</span>] = <span class="number">49</span></span><br><span class="line">	score[<span class="number">3</span>] = <span class="number">66</span></span><br><span class="line">	score[<span class="number">4</span>] = <span class="number">22</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> sum <span class="type">int</span> = <span class="number">0</span></span><br><span class="line">	<span class="comment">// 总和</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(score); i ++ &#123;</span><br><span class="line">		sum += score[i]</span><br><span class="line">	&#125;</span><br><span class="line">	avg := <span class="type">float32</span>(sum) / <span class="type">float32</span>(<span class="built_in">len</span>(score))</span><br><span class="line">	fmt.Println(<span class="string">&quot;总和：&quot;</span>, sum)</span><br><span class="line">	fmt.Println(<span class="string">&quot;平均分：&quot;</span>, avg)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> Golang基础语法</li>
+        <li><strong>作者:</strong> 冯旭光</li>
+        <li><strong>创建于
+                :</strong> 2024-02-08 21:30:01</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-03-11 14:43:46
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://blog.fengxuguang.top/posts/3e97faf3/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/golang/">#golang</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/posts/35ae3709/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Docker容器命令</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/posts/ee5b4d8/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Lombok语法</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="gitalk-container"></div>
+    <script data-swup-reload-script
+            src="//cdn.staticfile.org/gitalk/1.8.0/gitalk.min.js"></script>
+    <script data-swup-reload-script>
+
+        function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+                Gitalk && new Gitalk({
+                    clientID: '7155294f872e0ee349f7',
+                    clientSecret: '7298fd2636737cb5ef1bf2f76b08bfbfa1410f83',
+                    repo: 'xuguang.github.io',
+                    owner: 'fengxuguang',
+                    admin: ['fengxuguang'],
+                    id: __gitalk__pathname,
+                    language: 'zh-CN',
+                    proxy: 'https://github.com/login/oauth/access_token'
+                }).render('gitalk-container');
+
+            } catch (e) {
+                window.Gitalk = null;
+            }
+        }
+
+        if ('true') {
+            const loadGitalkTimeout = setTimeout(() => {
+                loadGitalk();
+                clearTimeout(loadGitalkTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+        }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">Golang基础语法</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GO-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-text">GO 基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#go-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-text">go 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89"><span class="nav-text">go 数据类型定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">go 数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B4%BE%E7%94%9F%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">派生数据类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-text">错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86-%E6%8D%95%E8%8E%B7%E6%9C%BA%E5%88%B6"><span class="nav-text">错误处理&#x2F;捕获机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%99%E8%AF%AF"><span class="nav-text">自定义错误</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-text">数组</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">冯旭光</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 41 篇文章
+                    </span>
+                    
+                        <span>
+                            共 33.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/anime.min.js"></script>
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+    <div id="aplayer"></div>
+<script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/APlayer.min.js"></script>
+<script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/plugins/aplayer.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="冯旭光">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://blog.fengxuguang.top/posts/5341e1d9/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="​	Semi Join(半连接)是 MySQL 优化子查询执行的核心技术之一，它通过特殊算法只检查存在性而不获取完整的结果集，显著提升了包含子查询的 SQL 性能。下面我将从多个维度深入剖析 Semi Join 的原理与实现。 一、Semi Join 的本质特征1.存在性检查  只判断外层表行是否在子查询结果集中存在匹配 不关心匹配数量（1次或多次都视为存在） 不获取子查询的任何实际数据  2.结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL Semi Join(半连接)解析">
+<meta property="og:url" content="https://blog.fengxuguang.top/posts/5341e1d9/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="​	Semi Join(半连接)是 MySQL 优化子查询执行的核心技术之一，它通过特殊算法只检查存在性而不获取完整的结果集，显著提升了包含子查询的 SQL 性能。下面我将从多个维度深入剖析 Semi Join 的原理与实现。 一、Semi Join 的本质特征1.存在性检查  只判断外层表行是否在子查询结果集中存在匹配 不关心匹配数量（1次或多次都视为存在） 不获取子查询的任何实际数据  2.结">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-07T02:04:23.000Z">
+<meta property="article:modified_time" content="2025-07-09T02:28:20.703Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/logo2.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/logo2.png">
+    <meta name="theme-color" content="#FCBC2C">
+    <link rel="shortcut icon" href="/images/logo2.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            MySQL Semi Join(半连接)解析 -
+        
+        冯旭光的博客
+    </title>
+
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fonts/fonts.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fonts/Satoshi/satoshi.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"blog.fengxuguang.top","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":4,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#FCBC2C","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1200px","sidebar_width":"238px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":false,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/Lakers.png","dark":"/images/home.jpg"},"title":"阿飞程序员修炼之路！","subtitle":{"text":["愿你如风，被人温柔以待！","用心码好每一行代码！"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/fengxuguang","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":true,"type":"fixed","audios":[{"name":"Dear Leslie","artist":"古巨基","url":"/video/古巨基 - Dear Leslie.mp3","cover":"/video/1.jpeg"}],"mini":true,"theme":"#FCBC2C","volume":0.5,"autoplay":true,"listFolded":true},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#542484","right":"#FCBC2C","transparency":99},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags/","icon":"fa-solid fa-tag"},"GitHub":{"path":"https://github.com/fengxuguang","icon":"fa-brands fa-github"}},"search":{"enable":true,"preload":true},"tags":{"标签":{"icon":"fa-solid fa-tags","path":"/tags/"}},"categories":{"分类":{"icon":"fa-solid fa-folder","path":"/categories/"}}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"用代码编织梦想，用程序书写人生！","show_on_mobile":true,"links":null},"article_date_format":"YYYY-MM-DD HH:mm:ss","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/2/1 07:23:14"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                冯旭光的博客
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags/"
+                                        >
+                                    <i class="fa-solid fa-tag fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   target="_blank" rel="noopener" href="https://github.com/fengxuguang"
+                                        >
+                                    <i class="fa-brands fa-github fa-fw"></i>
+                                    GITHUB
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags/"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-solid fa-tag fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           target="_blank" rel="noopener" href="https://github.com/fengxuguang"
+                        >
+                            <span>
+                                GITHUB
+                            </span>
+                            
+                                <i class="fa-brands fa-github fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">25</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">13</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">41</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">MySQL Semi Join(半连接)解析</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/avatar.jpg">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">冯旭光</span>
+                        
+                            <span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-07-07 10:04:23</span>
+        <span class="mobile">2025-07-07 10:04:23</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-07-09 10:28:20</span>
+            <span class="mobile">2025-07-09 10:28:20</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/mysql/">mysql</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.3k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>4 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <p>​	Semi Join(半连接)是 MySQL 优化子查询执行的核心技术之一，它通过特殊算法只检查存在性而不获取完整的结果集，显著提升了包含子查询的 SQL 性能。下面我将从多个维度深入剖析 Semi Join 的原理与实现。</p>
+<h2 id="一、Semi-Join-的本质特征"><a href="#一、Semi-Join-的本质特征" class="headerlink" title="一、Semi Join 的本质特征"></a>一、Semi Join 的本质特征</h2><p><strong>1.存在性检查</strong></p>
+<ul>
+<li>只判断外层表行是否在子查询结果集中存在匹配</li>
+<li>不关心匹配数量（1次或多次都视为存在）</li>
+<li>不获取子查询的任何实际数据</li>
+</ul>
+<p><strong>2.结果集特性</strong></p>
+<ul>
+<li>结果集仅包含外层表的列</li>
+<li>每行外层数据最多出现一次（即使子查询有多次匹配）</li>
+</ul>
+<p><strong>3.与常规连接的区别</strong></p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 常规 INNER JOIN （会返回两表匹配行）</span></span><br><span class="line"><span class="keyword">SELECT</span> o.<span class="operator">*</span> <span class="keyword">FROM</span> orders o <span class="keyword">INNER</span> <span class="keyword">JOIN</span> customers c <span class="keyword">ON</span> c.ID <span class="operator">=</span> o.CUST_ID;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Semi Join（只检查存在性）</span></span><br><span class="line"><span class="keyword">SELECT</span> o.<span class="operator">*</span> <span class="keyword">FROM</span> orders o <span class="keyword">WHERE</span> o.CUST_ID <span class="keyword">IN</span> (<span class="keyword">SELECT</span> id <span class="keyword">FROM</span> customers);</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="二、Semi-Join-的触发场景"><a href="#二、Semi-Join-的触发场景" class="headerlink" title="二、Semi Join 的触发场景"></a>二、Semi Join 的触发场景</h2><h3 id="1-语法形式触发"><a href="#1-语法形式触发" class="headerlink" title="1. 语法形式触发"></a>1. 语法形式触发</h3><ul>
+<li><p>IN 子查询：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A <span class="keyword">WHERE</span> x <span class="keyword">IN</span> (<span class="keyword">SELECT</span> y <span class="keyword">FROM</span> B);</span><br></pre></td></tr></table></figure></div></li>
+<li><p>EXISTS 子查询：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A <span class="keyword">WHERE</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> <span class="number">1</span> <span class="keyword">FROM</span> B <span class="keyword">WHERE</span> B.y <span class="operator">=</span> A.x);</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>某些比较操作：</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A <span class="keyword">WHERE</span> x <span class="operator">&gt;</span> <span class="keyword">ALL</span> (<span class="keyword">SELECT</span> y <span class="keyword">FROM</span> B);</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="2-优化器自动转换"><a href="#2-优化器自动转换" class="headerlink" title="2. 优化器自动转换"></a>2. 优化器自动转换</h3><p>MySQL 优化器会将某些子查询自动重写为 Semi Join 执行计划，即使 SQL 语句没有显示使用 IN&#x2F;EXISTS 语法。</p>
+<h2 id="三、Semi-Join-的五种执行策略"><a href="#三、Semi-Join-的五种执行策略" class="headerlink" title="三、Semi Join 的五种执行策略"></a>三、Semi Join 的五种执行策略</h2><p>MySQL 实现了多重 Semi Join 算法，优化器会根据成本选择最优方案：</p>
+<h3 id="1-Table-Pullout-子查询表提升"><a href="#1-Table-Pullout-子查询表提升" class="headerlink" title="1. Table Pullout(子查询表提升)"></a>1. Table Pullout(子查询表提升)</h3><p><strong>适用场景：</strong>子查询只引用一个表且简单</p>
+<p><strong>执行过程：</strong></p>
+<ol>
+<li>将子查询表提升到外层查询</li>
+<li>转换为普通 JOIN 操作</li>
+</ol>
+<p><strong>示例转换：</strong></p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 原始查询</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> orders <span class="keyword">WHERE</span> cust_id <span class="keyword">IN</span> (<span class="keyword">SELECT</span> id <span class="keyword">FROM</span> customers <span class="keyword">WHERE</span> status<span class="operator">=</span><span class="string">&#x27;active&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 优化后</span></span><br><span class="line"><span class="keyword">SELECT</span> o.<span class="operator">*</span> <span class="keyword">FROM</span> orders o <span class="keyword">JOIN</span> customers c <span class="keyword">ON</span> c.id <span class="operator">=</span> o.cust_id <span class="keyword">WHERE</span> c.status<span class="operator">=</span><span class="string">&#x27;active&#x27;</span>;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="2-Duplicate-Weedout-重复消除"><a href="#2-Duplicate-Weedout-重复消除" class="headerlink" title="2. Duplicate Weedout(重复消除)"></a>2. Duplicate Weedout(重复消除)</h3><p><strong>适用场景：</strong>子查询可能有多次匹配</p>
+<p><strong>执行过程：</strong></p>
+<ol>
+<li>先执行子查询获取结果集</li>
+<li>在外层查询中使用临时表记录已匹配的外层行</li>
+<li>过滤掉重复匹配</li>
+</ol>
+<p><strong>特定：</strong></p>
+<ul>
+<li>需要维护临时表记录匹配状态</li>
+<li>适用于子查询结果集较小的情况</li>
+</ul>
+<h3 id="3-Loose-Scan-松散扫描"><a href="#3-Loose-Scan-松散扫描" class="headerlink" title="3. Loose Scan(松散扫描)"></a>3. Loose Scan(松散扫描)</h3><p><strong>适用场景：</strong>子查询列有索引且基数高</p>
+<p><strong>执行过程：</strong></p>
+<ol>
+<li>利用索引跳跃扫描</li>
+<li>只检查索引中是否存在匹配值</li>
+<li>不需要读取完整的子查询数据</li>
+</ol>
+<p><strong>优势：</strong></p>
+<ul>
+<li>极大减少 I&#x2F;O 操作</li>
+<li>适合高选择性列</li>
+</ul>
+<h2 id="4-Materialization-物化"><a href="#4-Materialization-物化" class="headerlink" title="4. Materialization(物化)"></a>4. Materialization(物化)</h2><p><strong>适用场景：</strong>子查询复杂或无合适索引</p>
+<p><strong>执行过程：</strong></p>
+<ol>
+<li>将子查询结果物化为临时表</li>
+<li>在临时表上建立索引</li>
+<li>执行半连接操作</li>
+</ol>
+<p><strong>特点：</strong></p>
+<p>物化成本较高</p>
+<p>适合子查询执行代价大的情况</p>
+<h2 id="5-FirstMatch-首次匹配"><a href="#5-FirstMatch-首次匹配" class="headerlink" title="5. FirstMatch(首次匹配)"></a>5. FirstMatch(首次匹配)</h2><p><strong>适用场景：</strong>子查询可能有多次匹配但只需要确认存在性</p>
+<p><strong>执行过程：</strong></p>
+<ol>
+<li>对外层表每行，扫描子查询直到找到第一个匹配</li>
+<li>找到即停止，不继续检查剩余匹配</li>
+</ol>
+<p><strong>优势：</strong></p>
+<ul>
+<li>平均情况下减少子查询执行次数</li>
+<li>适合子查询匹配分布不均匀的情况</li>
+</ul>
+<h2 id="四、执行计划解读"><a href="#四、执行计划解读" class="headerlink" title="四、执行计划解读"></a>四、执行计划解读</h2><p>在 EXPLAIN 输出中识别 Semi Join：</p>
+<h3 id="1-关键标识："><a href="#1-关键标识：" class="headerlink" title="1. 关键标识："></a>1. 关键标识：</h3><ul>
+<li>Extra 列显示”Using semi join”</li>
+<li>可能伴随其他子策略提示如”Using duplicate weedout”</li>
+</ul>
+<h3 id="2-执行计划示例"><a href="#2-执行计划示例" class="headerlink" title="2.执行计划示例"></a>2.执行计划示例</h3><div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> select_type <span class="operator">|</span> <span class="keyword">table</span> <span class="operator">|</span> partitions <span class="operator">|</span> type <span class="operator">|</span> possible_keys <span class="operator">|</span> key  <span class="operator">|</span> key_len <span class="operator">|</span> <span class="keyword">ref</span>  <span class="operator">|</span> <span class="keyword">rows</span> <span class="operator">|</span> filtered <span class="operator">|</span> Extra       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> SIMPLE      <span class="operator">|</span> orders<span class="operator">|</span> <span class="keyword">NULL</span>       <span class="operator">|</span> <span class="keyword">ALL</span>  <span class="operator">|</span> <span class="keyword">NULL</span>          <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span> <span class="number">1000</span> <span class="operator">|</span>   <span class="number">100.00</span> <span class="operator">|</span> <span class="keyword">Using</span> <span class="keyword">where</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> SIMPLE      <span class="operator">|</span> cust  <span class="operator">|</span> <span class="keyword">NULL</span>       <span class="operator">|</span> eq_ref<span class="operator">|</span> <span class="keyword">PRIMARY</span>       <span class="operator">|</span> <span class="keyword">PRIMARY</span><span class="operator">|</span> <span class="number">4</span>       <span class="operator">|</span> orders.cust_id <span class="operator">|</span> <span class="number">1</span> <span class="operator">|</span>   <span class="number">100.00</span> <span class="operator">|</span> <span class="keyword">Using</span> index; <span class="keyword">Using</span> semi <span class="keyword">join</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="3-策略识别"><a href="#3-策略识别" class="headerlink" title="3. 策略识别"></a>3. 策略识别</h3><ul>
+<li>“Using semi join”表明使用了半连接优化</li>
+<li>结合其他 Extra 信息可判断具体策略（如”Using duplicate weedout”）</li>
+</ul>
+<h2 id="五、性能优化建议"><a href="#五、性能优化建议" class="headerlink" title="五、性能优化建议"></a>五、性能优化建议</h2><h3 id="1-索引优化"><a href="#1-索引优化" class="headerlink" title="1. 索引优化"></a>1. 索引优化</h3><ul>
+<li>确保子查询连接列有适当索引</li>
+<li>复合索引需考虑列顺序</li>
+</ul>
+<h3 id="2-查询重写"><a href="#2-查询重写" class="headerlink" title="2. 查询重写"></a>2. 查询重写</h3><ul>
+<li>将复杂子查询改写为 JOIN 形式</li>
+<li>使用 EXISTS 替代 IN （或反之）看哪种更高效</li>
+</ul>
+<h3 id="3-统计信息更新"><a href="#3-统计信息更新" class="headerlink" title="3. 统计信息更新"></a>3. 统计信息更新</h3><div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ANALYZE <span class="keyword">TABLE</span> table_name;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>确保优化器有准确的基数统计</li>
+</ul>
+<h3 id="4-监控与调优"><a href="#4-监控与调优" class="headerlink" title="4. 监控与调优"></a>4. 监控与调优</h3><ul>
+<li>使用 EXPLAIN ANALYZE(MySQL 8.0+) 查看实际执行情况</li>
+<li>关注临时表使用情况</li>
+</ul>
+<h2 id="六、Semi-Join-的局限性与注意事项"><a href="#六、Semi-Join-的局限性与注意事项" class="headerlink" title="六、Semi Join 的局限性与注意事项"></a>六、Semi Join 的局限性与注意事项</h2><h3 id="1-不支持的情况"><a href="#1-不支持的情况" class="headerlink" title="1. 不支持的情况"></a>1. 不支持的情况</h3><ul>
+<li>子查询包含 GROUP BY、HAVING 或聚合函数</li>
+<li>子查询返回多列（某些情况下）</li>
+<li>特定类型的比较操作</li>
+</ul>
+<h3 id="2-可能退化为其他执行计划"><a href="#2-可能退化为其他执行计划" class="headerlink" title="2. 可能退化为其他执行计划"></a>2. 可能退化为其他执行计划</h3><ul>
+<li>当优化器认为其他方案成本更低时</li>
+<li>数据分布不符合预期时</li>
+</ul>
+<h3 id="3-版本差异"><a href="#3-版本差异" class="headerlink" title="3. 版本差异"></a>3. 版本差异</h3><ul>
+<li>不同 MySQL 版本支持的 Semi Join 策略可能不同</li>
+<li>MySQL 8.0 对 Semi Join 有更多优化</li>
+</ul>
+<p>​	Semi Join 是 MySQL 查询优化器的重要创新，深入理解其原理和实现有助于编写更高效的 SQL 语句，特别是在处理复杂子查询时。实际应用中应结合 EXPLAIN 分析，选择最合适的查询写法。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> MySQL Semi Join(半连接)解析</li>
+        <li><strong>作者:</strong> 冯旭光</li>
+        <li><strong>创建于
+                :</strong> 2025-07-07 10:04:23</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-07-09 10:28:20
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://blog.fengxuguang.top/posts/5341e1d9/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/mysql/">#mysql</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/posts/4a17b156/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Hello World</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="gitalk-container"></div>
+    <script data-swup-reload-script
+            src="//cdn.staticfile.org/gitalk/1.8.0/gitalk.min.js"></script>
+    <script data-swup-reload-script>
+
+        function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+                Gitalk && new Gitalk({
+                    clientID: '7155294f872e0ee349f7',
+                    clientSecret: '7298fd2636737cb5ef1bf2f76b08bfbfa1410f83',
+                    repo: 'xuguang.github.io',
+                    owner: 'fengxuguang',
+                    admin: ['fengxuguang'],
+                    id: __gitalk__pathname,
+                    language: 'zh-CN',
+                    proxy: 'https://github.com/login/oauth/access_token'
+                }).render('gitalk-container');
+
+            } catch (e) {
+                window.Gitalk = null;
+            }
+        }
+
+        if ('true') {
+            const loadGitalkTimeout = setTimeout(() => {
+                loadGitalk();
+                clearTimeout(loadGitalkTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+        }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">MySQL Semi Join(半连接)解析</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Semi-Join-%E7%9A%84%E6%9C%AC%E8%B4%A8%E7%89%B9%E5%BE%81"><span class="nav-text">一、Semi Join 的本质特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Semi-Join-%E7%9A%84%E8%A7%A6%E5%8F%91%E5%9C%BA%E6%99%AF"><span class="nav-text">二、Semi Join 的触发场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%AF%AD%E6%B3%95%E5%BD%A2%E5%BC%8F%E8%A7%A6%E5%8F%91"><span class="nav-text">1. 语法形式触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BC%98%E5%8C%96%E5%99%A8%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2"><span class="nav-text">2. 优化器自动转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Semi-Join-%E7%9A%84%E4%BA%94%E7%A7%8D%E6%89%A7%E8%A1%8C%E7%AD%96%E7%95%A5"><span class="nav-text">三、Semi Join 的五种执行策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Table-Pullout-%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%A1%A8%E6%8F%90%E5%8D%87"><span class="nav-text">1. Table Pullout(子查询表提升)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Duplicate-Weedout-%E9%87%8D%E5%A4%8D%E6%B6%88%E9%99%A4"><span class="nav-text">2. Duplicate Weedout(重复消除)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Loose-Scan-%E6%9D%BE%E6%95%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">3. Loose Scan(松散扫描)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Materialization-%E7%89%A9%E5%8C%96"><span class="nav-text">4. Materialization(物化)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-FirstMatch-%E9%A6%96%E6%AC%A1%E5%8C%B9%E9%85%8D"><span class="nav-text">5. FirstMatch(首次匹配)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E8%A7%A3%E8%AF%BB"><span class="nav-text">四、执行计划解读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%85%B3%E9%94%AE%E6%A0%87%E8%AF%86%EF%BC%9A"><span class="nav-text">1. 关键标识：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E7%A4%BA%E4%BE%8B"><span class="nav-text">2.执行计划示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%AD%96%E7%95%A5%E8%AF%86%E5%88%AB"><span class="nav-text">3. 策略识别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="nav-text">五、性能优化建议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96"><span class="nav-text">1. 索引优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9F%A5%E8%AF%A2%E9%87%8D%E5%86%99"><span class="nav-text">2. 查询重写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BB%9F%E8%AE%A1%E4%BF%A1%E6%81%AF%E6%9B%B4%E6%96%B0"><span class="nav-text">3. 统计信息更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98"><span class="nav-text">4. 监控与调优</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81Semi-Join-%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">六、Semi Join 的局限性与注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%8D%E6%94%AF%E6%8C%81%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-text">1. 不支持的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8F%AF%E8%83%BD%E9%80%80%E5%8C%96%E4%B8%BA%E5%85%B6%E4%BB%96%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92"><span class="nav-text">2. 可能退化为其他执行计划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%89%88%E6%9C%AC%E5%B7%AE%E5%BC%82"><span class="nav-text">3. 版本差异</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">冯旭光</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 41 篇文章
+                    </span>
+                    
+                        <span>
+                            共 33.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/anime.min.js"></script>
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+    <div id="aplayer"></div>
+<script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/APlayer.min.js"></script>
+<script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/plugins/aplayer.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="冯旭光">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        
+        
+        
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://blog.fengxuguang.top/posts/70f07f5e/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="​	你想以最快的速度学习人类史上最好的文本编辑器 VIM 吗？你先得懂得如何在 VIM 幸存下来，然后一点一点地学习各种戏法。 ​	Vim the Six Billion Dollar editor  Better, Stronger, Faster.  ​	学习 Vim 并且其会成为你最后一个使用的文本编辑器。没有比这个更好的文本编辑器了，非常地难学，但是却不可思议地好用。 在开始学习以前，我需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VIM 练级攻略">
+<meta property="og:url" content="https://blog.fengxuguang.top/posts/70f07f5e/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="​	你想以最快的速度学习人类史上最好的文本编辑器 VIM 吗？你先得懂得如何在 VIM 幸存下来，然后一点一点地学习各种戏法。 ​	Vim the Six Billion Dollar editor  Better, Stronger, Faster.  ​	学习 Vim 并且其会成为你最后一个使用的文本编辑器。没有比这个更好的文本编辑器了，非常地难学，但是却不可思议地好用。 在开始学习以前，我需">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.fengxuguang.top/images/articles/vim/word_moves.jpg">
+<meta property="og:image" content="https://blog.fengxuguang.top/images/articles/vim/line_moves.jpg">
+<meta property="og:image" content="https://blog.fengxuguang.top/images/articles/vim/textobjects.png">
+<meta property="og:image" content="https://blog.fengxuguang.top/images/articles/vim/rectangular-blocks.gif">
+<meta property="og:image" content="https://blog.fengxuguang.top/images/articles/vim/completion.gif">
+<meta property="og:image" content="https://blog.fengxuguang.top/images/articles/vim/macros.gif">
+<meta property="og:image" content="https://blog.fengxuguang.top/images/articles/vim/autoindent.gif">
+<meta property="og:image" content="https://blog.fengxuguang.top/images/articles/vim/append-to-many-lines.gif">
+<meta property="og:image" content="https://blog.fengxuguang.top/images/articles/vim/split.gif">
+<meta property="article:published_time" content="2024-09-20T01:33:13.000Z">
+<meta property="article:modified_time" content="2025-03-11T06:43:46.018Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="vim">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.fengxuguang.top/images/articles/vim/word_moves.jpg">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/logo2.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/logo2.png">
+    <meta name="theme-color" content="#FCBC2C">
+    <link rel="shortcut icon" href="/images/logo2.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            VIM 练级攻略 -
+        
+        冯旭光的博客
+    </title>
+
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fonts/Chillax/chillax.css">
+
+    <!--- Inject Part-->
+    
+
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/assets/build/styles.css">
+    
+
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fonts/fonts.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fonts/Satoshi/satoshi.css">
+    <!--- Font Part-->
+    
+    
+    
+    
+
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"blog.fengxuguang.top","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":4,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#FCBC2C","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1200px","sidebar_width":"238px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":false,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/Lakers.png","dark":"/images/home.jpg"},"title":"阿飞程序员修炼之路！","subtitle":{"text":["愿你如风，被人温柔以待！","用心码好每一行代码！"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/fengxuguang","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":true,"type":"fixed","audios":[{"name":"Dear Leslie","artist":"古巨基","url":"/video/古巨基 - Dear Leslie.mp3","cover":"/video/1.jpeg"}],"mini":true,"theme":"#FCBC2C","volume":0.5,"autoplay":true,"listFolded":true},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#542484","right":"#FCBC2C","transparency":99},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags/","icon":"fa-solid fa-tag"},"GitHub":{"path":"https://github.com/fengxuguang","icon":"fa-brands fa-github"}},"search":{"enable":true,"preload":true},"tags":{"标签":{"icon":"fa-solid fa-tags","path":"/tags/"}},"categories":{"分类":{"icon":"fa-solid fa-folder","path":"/categories/"}}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"用代码编织梦想，用程序书写人生！","show_on_mobile":true,"links":null},"article_date_format":"YYYY-MM-DD HH:mm:ss","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/2/1 07:23:14"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/brands.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/solid.min.css">
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/fontawesome/regular.min.css">
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                冯旭光的博客
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags/"
+                                        >
+                                    <i class="fa-solid fa-tag fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   target="_blank" rel="noopener" href="https://github.com/fengxuguang"
+                                        >
+                                    <i class="fa-brands fa-github fa-fw"></i>
+                                    GITHUB
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags/"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-solid fa-tag fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           target="_blank" rel="noopener" href="https://github.com/fengxuguang"
+                        >
+                            <span>
+                                GITHUB
+                            </span>
+                            
+                                <i class="fa-brands fa-github fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">25</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">13</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">41</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">VIM 练级攻略</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/avatar.jpg">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">冯旭光</span>
+                        
+                            <span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-09-20 09:33:13</span>
+        <span class="mobile">2024-09-20 09:33:13</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-03-11 14:43:46</span>
+            <span class="mobile">2025-03-11 14:43:46</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/vim/">vim</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2.9k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>11 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <p>​	你想以最快的速度学习人类史上最好的文本编辑器 VIM 吗？你先得懂得如何在 VIM 幸存下来，然后一点一点地学习各种戏法。</p>
+<p>​	Vim the Six Billion Dollar editor</p>
+<blockquote>
+<p>Better, Stronger, Faster.</p>
+</blockquote>
+<p>​	学习 Vim 并且其会成为你最后一个使用的文本编辑器。没有比这个更好的文本编辑器了，非常地难学，但是却不可思议地好用。</p>
+<p>在开始学习以前，我需要给你一些<strong>警告</strong>：</p>
+<ul>
+<li>学习 Vim 在开始时是痛苦的。</li>
+<li>需要时间</li>
+<li>需要不断地练习，就像你学习一个乐器一样。</li>
+<li>不用期望你能在 3 天内把 Vim 练得比别的编辑器更有效率。</li>
+<li>事实上，你需要 2 周时间的苦练，而不是 3 天。</li>
+</ul>
+<p>本文目录主要以下面四个章节编写：</p>
+<ul>
+<li>存活</li>
+<li>感觉良好</li>
+<li>觉得更好，更强，更快</li>
+<li>使用 VIM 的超能力</li>
+</ul>
+<p>当你看完这篇文章，你会成为一个 Vim 的 SuperStar。</p>
+<h2 id="第一章-存活"><a href="#第一章-存活" class="headerlink" title="第一章 - 存活"></a>第一章 - 存活</h2><ol>
+<li>安装 <a href="www.vim.org">Vim</a></li>
+<li>启动 Vim</li>
+<li><strong>什么也别干！</strong>请先阅读</li>
+</ol>
+<p>当你安装好一个编辑器后，你一定会想在其中输入点什么东西，然后看看这个编辑器是什么样子。但是 Vim 不是这样的，请按照下面的命令操作：</p>
+<ul>
+<li>启动 Vim 后，Vim 在 <code>Normal</code> 模式下。</li>
+<li>让我们进入 <code>Insert</code> 模式，请按下键 i。（Vim 左下角有一个 <code>--insert--</code> 字样，表示你可以以插入的方式输入了）</li>
+<li>此时，你可以输入文本了，就像你用“记事本”一样。</li>
+<li>如果你想返回 Normal 模式，请按<code>ESC</code>键。</li>
+</ul>
+<p>现在，你指定如何在 Insert 和 Normal 模式下切换了。下面是一些命令，可以让你在 Normal 模式下幸存下来：</p>
+<blockquote>
+<ul>
+<li><code>i</code>-&gt; Insert 模式，按<code>ESC</code>回到 Normal 模式。</li>
+<li><code>x</code>-&gt; 删除当前光标所在的一个字符。</li>
+<li><code>:wq</code>-&gt; 保存 + 退出（<code>:w</code>保存，<code>:q</code>退出）</li>
+<li><code>dd</code>-&gt; 删除当前行，并把删除的行存到<code>剪贴板</code>里</li>
+<li><code>p</code>-&gt; 粘贴剪贴板</li>
+</ul>
+<p><strong>推荐</strong></p>
+<ul>
+<li><code>hjkl</code>-&gt; 你可以使用光标键(←↓↑→)，j 对应下箭头。</li>
+<li><code>:help &lt;command&gt;</code>-&gt; 显示相关命令的帮助。你也可以就输入<code>:help</code>而不跟命令。</li>
+</ul>
+</blockquote>
+<p>你能在 Vim 幸存下来只需要上述的 5 个命令，你就可以编辑文本了，你一定要把这些命令练成一种下意识的状态。于是你就可以开始进阶到第二章了。</p>
+<p>但是，在你进入第二章时，需要再说一下 Normal 模式。在一般的编辑器下，当你需要 copy 一段文字的时候，你需要使用<code>Ctrl</code>键，比如：<code>Ctrl-c</code>。也就是说，Ctrl 键就像功能键一样，当你按下了功能键 Ctrl 后，c 就不在是 c 了，而就是一个命令或是一个快捷键了，<strong>在 VIM 的 Normal 模式下，所有的键就是功能键了。</strong></p>
+<p>提示：</p>
+<ul>
+<li>下面的文字中，如果是<code>Ctrl-x</code>我会写成<code>&lt;C-x&gt;</code>。</li>
+<li>以<code>:</code>开始的命令你需要输入<code>&lt;enter&gt;</code>回车，例如：如果我写成<code>:q</code>也就是说你要输入<code>:q&lt;enter&gt;</code>。</li>
+</ul>
+<h2 id="第二章-感觉良好"><a href="#第二章-感觉良好" class="headerlink" title="第二章 - 感觉良好"></a>第二章 - 感觉良好</h2><p>​	上面的那些命令只能让你存活下来，现在是时候学习一些更多的命令了，下面是我的建议：所有的命令都需要在 Normal 模式下使用，如果你不知道现在在什么模式下，你就狂按几次<code>ESC</code>键。</p>
+<p><strong>1. 各种插入模式</strong></p>
+<blockquote>
+<ul>
+<li><code>a</code>-&gt; 在光标后插入</li>
+<li><code>o</code>-&gt; 在当前行后插入一个新行</li>
+<li><code>O</code>-&gt; 在当前行前插入一个新行</li>
+<li><code>cw</code>-&gt; 替换从光标所在位置后到第一个单词结尾的字符</li>
+</ul>
+</blockquote>
+<p><strong>2. 简单的移动光标</strong></p>
+<blockquote>
+<ul>
+<li><code>0</code>-&gt; 数字零，当行头</li>
+<li><code>^</code>-&gt; 到本行第一个不是 blank 字符的位置（所谓 blank 字符就是<code>空格</code>，<code>tab</code>，<code>换行</code>，<code>回车</code>等）</li>
+<li><code>&amp;</code>-&gt; 到本行行尾</li>
+<li><code>g_</code>-&gt; 到本行最后一个不是 blank 字符的位置</li>
+<li><code>/pattern</code>-&gt; 搜索<code>pattern</code>的字符串（如果搜索出多个匹配，可按<code>n</code>键查找下一个，<code>N</code>键向上查找）</li>
+</ul>
+</blockquote>
+<p><strong>3. 拷贝&#x2F;粘贴</strong>（p&#x2F;P 都可以，p 表示在当前位置之后，P 表示在当前位置之前）</p>
+<blockquote>
+<ul>
+<li><code>p</code> -&gt; 粘贴</li>
+<li><code>yy</code> -&gt; 拷贝当前行，相当于 <code>ddp</code></li>
+</ul>
+</blockquote>
+<p><strong>4. Undo&#x2F;Redo</strong></p>
+<blockquote>
+<ul>
+<li><code>u</code> -&gt; undo</li>
+<li><code>&lt;Ctrl-r&gt;</code> -&gt; redo</li>
+</ul>
+</blockquote>
+<p><strong>5. 打开&#x2F;保存&#x2F;退出&#x2F;改变文件</strong></p>
+<blockquote>
+<ul>
+<li><code>:e &lt;path/to/file&gt;</code> -&gt; 打开一个文件</li>
+<li><code>:w</code> -&gt; 保存</li>
+<li><code>:saveas &lt;path/to/file&gt;</code> -&gt; 另存为 <code>&lt;path/to/file&gt;</code></li>
+<li><code>:x</code>, <code>ZZ</code> 或 <code>:wq</code> -&gt; 保存并退出（<code>:x</code> 表示仅在需要时保存，<code>ZZ</code> 不需要输入冒号并回车）</li>
+<li><code>q!</code> -&gt; 退出</li>
+</ul>
+</blockquote>
+<p>花点时间熟悉下上面的命令，一旦你掌握了它们，你就几乎可以干其它编辑器都能干的事了。</p>
+<h2 id="第三级-更好，更强，更快"><a href="#第三级-更好，更强，更快" class="headerlink" title="第三级 - 更好，更强，更快"></a>第三级 - 更好，更强，更快</h2><p>进行到这一步，恭喜你，你干的不错。到这我们可以开始一些更为有趣的事情了。在第三级，我们只谈那些和 vi 可以兼容的命令。</p>
+<h3 id="更好"><a href="#更好" class="headerlink" title="更好"></a>更好</h3><p>下面，让我们看一下 Vim 是怎么重复自己的：</p>
+<ol>
+<li><code>.</code>-&gt; (小数点)可以重复上一次的命令</li>
+<li><code>N&lt;command&gt;</code>-&gt; 重复某个命令 N 次</li>
+</ol>
+<p>下面是一个示例，打开一个文件你可以试试下面的命令：</p>
+<blockquote>
+<ul>
+<li><code>2dd</code> -&gt; 删除 2 行</li>
+<li><code>3p</code> -&gt; 粘贴文本 3 次</li>
+<li><code>5idesu [ESC]</code> -&gt; 会写下”desu desu desu desu desu desu“</li>
+<li><code>.</code> -&gt; 重复上一个命令 -&gt; <code>5idesu [ESC]</code></li>
+<li><code>3.</code> -&gt; 重复 3 次“desu”（注意：不是 5 次，你看，Vim 多聪明啊）</li>
+</ul>
+</blockquote>
+<h3 id="更强"><a href="#更强" class="headerlink" title="更强"></a>更强</h3><p>你要让你的光标移动更有效率，你一定要了解下面的这些命令，<strong>千万别跳过</strong>。</p>
+<ol>
+<li><p><code>NG</code> -&gt; 跳到第 N 行（注意命令中的 G 是大写，另一种方式，使用<code>:N</code>到第  N 行，如<code>:99</code>跳到第 99 行）</p>
+</li>
+<li><p><code>gg</code> -&gt; 跳到第一行（相当于<code>1G</code>或<code>:1</code>）</p>
+</li>
+<li><p><code>G</code> -&gt; 跳到最后一行</p>
+</li>
+<li><p>按单词移动：</p>
+<blockquote>
+<ol>
+<li><code>w</code> -&gt; 到下一个单词的开头。</li>
+<li><code>e</code> -&gt; 到下一个单词的结尾。</li>
+</ol>
+<blockquote>
+<p>如果你认为单词是由 blank 字符分隔符，那么你需要使用大写的 <code>E</code>和<code>W</code>。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../images/articles/vim/word_moves.jpg"
+                      alt="word_moves"
+                ></p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<p>下面说下最强的光标移动：</p>
+<blockquote>
+<ul>
+<li><code>%</code>：匹配括号移动，包括<code>(</code>，<code>&#123;</code>，<code>[</code>。（注意：你需要把光标先移动到括号上）</li>
+<li><code>*</code>和<code>#</code>：匹配光标当前所在的单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）</li>
+</ul>
+</blockquote>
+<p>相信我，上面这三个命令对程序员来说是相当强大的。</p>
+<h3 id="更快"><a href="#更快" class="headerlink" title="更快"></a>更快</h3><p>你一定要记住光标的移动，因为很多命令都可以和这些移动光标的命令连动。很多命令都可以如下来操作：</p>
+<p><code>&lt;start position&gt;&lt;command&gt;&lt;end position&gt;</code></p>
+<p>例如<code>0y$</code>命令意味着：</p>
+<ul>
+<li><code>0</code> -&gt; 先到行头</li>
+<li><code>y</code> -&gt; 从这里开始拷贝</li>
+<li><code>$</code> -&gt; 拷贝到本行最后一个字符</li>
+</ul>
+<p>你可以输入<code>ye</code>，从当前位置拷贝到本单词的最后一个字符。</p>
+<p>你也可以输入<code>y2/foo</code>来拷贝 2 个“foo”之间的字符串。</p>
+<p>还有很多命令并不一定要按 y 才会拷贝，下面的命令也会被拷贝：</p>
+<ul>
+<li><code>d</code>（删除）</li>
+<li><code>v</code>（可视化的选择）</li>
+<li><code>gU</code>（变大写）</li>
+<li><code>gu</code>（变小写）</li>
+<li>等等</li>
+</ul>
+<p>（可视化选择是一个很有意思的命令，你可以先按<code>v</code>，然后移动光标，你就会看到文本被选择，然后，你可能d，也可能y，也可以变大写等等）</p>
+<h2 id="第四级-Vim-超能力"><a href="#第四级-Vim-超能力" class="headerlink" title="第四级 - Vim 超能力"></a>第四级 - Vim 超能力</h2><p>你只需要掌握前面的命令，你就可以很舒服的使用 Vim 了。但是，现在，我向你介绍的是 Vim 杀手级的功能。下面这些功能是我只用 Vim 的原因。</p>
+<p><strong>在当前行上移动光标：<code>0</code> <code>^</code> <code>$</code> <code>f</code> <code>F</code> <code>t</code> <code>T</code> <code>,</code> <code>;</code></strong></p>
+<blockquote>
+<ul>
+<li><p><code>0</code> -&gt; 到行头</p>
+</li>
+<li><p><code>^</code> -&gt; 到本行的第一个非 blank 字符</p>
+</li>
+<li><p><code>$</code> -&gt; 到行尾</p>
+</li>
+<li><p><code>g_</code> -&gt; 到本行最后一个不是 blank 字符的位置</p>
+</li>
+<li><p><code>fa</code> -&gt; 到下一个为 a 的字符处，你也可以 fs 到下一个为 s 的字符处。</p>
+</li>
+<li><p><code>t,</code> -&gt; 到逗号前的第一个字符。逗号可以变成其他字符。</p>
+</li>
+<li><p><code>3fa</code> -&gt; 在当前行查找第三个出现的 a。</p>
+</li>
+<li><p><code>F</code> 和 <code>T</code> -&gt; 和 <code>f</code> 和 <code>t</code> 一样，只不过是相反方向。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../images/articles/vim/line_moves.jpg"
+                      alt="line_moves"
+                ></p>
+</li>
+</ul>
+</blockquote>
+<p>还有一个很有用的命令是<code>dt&quot;</code> -&gt; 删除所有的内容，直到遇到双引号<code>&quot;</code>。</p>
+<h3 id="区域选择a或i"><a href="#区域选择a或i" class="headerlink" title="区域选择&lt;action&gt;a&lt;object&gt;或&lt;action&gt;i&lt;object&gt;"></a>区域选择<code>&lt;action&gt;a&lt;object&gt;</code>或<code>&lt;action&gt;i&lt;object&gt;</code></h3><p>在 Visual 模式下，这些命令很强大，其命令格式为：<code>&lt;action&gt;a&lt;object&gt;</code>和<code>&lt;action&gt;i&lt;object&gt;</code></p>
+<ul>
+<li>action 可以是任何命令，如<code>d</code>（删除），<code>y</code>（拷贝），<code>v</code>（可以视模式选择）。</li>
+<li>object 可能是：<code>w</code>一个单词，<code>W</code>一个以空格为分隔的单词，<code>s</code>一个句字，<code>p</code>一个段落。也可以是一个特别的字符：<code>&quot;、</code> <code>&#39;、</code> <code>)、</code> <code>&#125;、</code> <code>]。</code></li>
+</ul>
+<p>假设你有一个字符串<code>(map (+) (&quot;foo&quot;))</code>，而光标键在第一个<code>o</code>的位置。</p>
+<blockquote>
+<ul>
+<li><p><code>vi&quot;</code> -&gt; 会选择 <code>foo</code>.</p>
+</li>
+<li><p><code>va&quot;</code> -&gt; 会选择 <code>&quot;foo&quot;</code>.</p>
+</li>
+<li><p><code>vi)</code> -&gt; 会选择 <code>&quot;foo&quot;</code>.</p>
+</li>
+<li><p><code>va)</code> -&gt; 会选择 <code>(&quot;foo&quot;)</code>.</p>
+</li>
+<li><p><code>v2i)</code> -&gt; 会选择 <code>map (+) (&quot;foo&quot;)</code>.</p>
+</li>
+<li><p><code>v2a)</code> -&gt; 会选择 <code>(map (+) (&quot;foo&quot;))</code>.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../images/articles/vim/textobjects.png"
+                      alt="textobjects"
+                ></p>
+</li>
+</ul>
+</blockquote>
+<h3 id="块操作："><a href="#块操作：" class="headerlink" title="块操作：&lt;C-v&gt;"></a>块操作：<code>&lt;C-v&gt;</code></h3><p>块操作，典型的操作：<code>0 &lt;C-v&gt; &lt;C-d&gt; I-- [ESC]</code></p>
+<ul>
+<li><p><code>^</code> -&gt; 到行头</p>
+</li>
+<li><p><code>&lt;C-v&gt;</code> -&gt; 开始块操作</p>
+</li>
+<li><p><code>&lt;C-d&gt;</code> -&gt; 向下移动（你也可以使用<code>hjkl</code>来移动光标，或是使用<code>%</code>，或是别的）</p>
+</li>
+<li><p><code>I-- [ESC]</code> -&gt; I 是插入，插入“<code>--</code>”，按 ESC 键来为每一行生效。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../images/articles/vim/rectangular-blocks.gif"
+                      alt="rectangular-blocks"
+                ></p>
+</li>
+</ul>
+<p>在 Windows 下的 Vim，你需要使用<code>&lt;C-q&gt;</code>而不是<code>&lt;C-v&gt;</code>，<code>&lt;C-v&gt;</code>是拷贝剪贴板。</p>
+<h3 id="自动提示：和"><a href="#自动提示：和" class="headerlink" title="自动提示：&lt;C-n&gt;和&lt;C-p&gt;"></a>自动提示：<code>&lt;C-n&gt;</code>和<code>&lt;C-p&gt;</code></h3><p>在 Insert 模式下，你可以输入一个词的开头，然后按<code>&lt;C-p&gt;或是&lt;C-n&gt;，自动补齐功能就出现了...</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../images/articles/vim/completion.gif"
+                      alt="completion"
+                ></p>
+<h3 id="宏录制：qa操作序列q-a，"><a href="#宏录制：qa操作序列q-a，" class="headerlink" title="宏录制：qa操作序列q,@a，@@"></a>宏录制：<code>qa</code>操作序列<code>q</code>,<code>@a</code>，<code>@@</code></h3><ul>
+<li><code>qa</code> 把你的操作记录在寄存器<code>a。</code></li>
+<li>于是<code>@a</code>会 replay 被录制的宏。</li>
+<li><code>@@</code>是一个快捷键用来 replay 最新录制的宏。</li>
+</ul>
+<blockquote>
+<p><strong>示例</strong></p>
+<p>在一个只有一行且这一行只有“1”的文本中，键入如下命令：</p>
+<ul>
+<li><code>qaYp&lt;C-a&gt;q</code> -&gt; <ul>
+<li><code>qa</code> 开始录制</li>
+<li><code>Yp</code> 复制行</li>
+<li><code>&lt;C-a&gt;</code>增加</li>
+<li><code>q</code>停止录制</li>
+</ul>
+</li>
+<li><code>@a</code> -&gt; 在 1 下面写下 2</li>
+<li><code>@@</code> -&gt; 在 2 正面写下 3</li>
+<li>现在做 <code>100@@</code>会创建新的 100 行，并把数据增加到 103.</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../images/articles/vim/macros.gif"
+                      alt="macros"
+                ></p>
+</blockquote>
+<h3 id="可视化选择：v，V，"><a href="#可视化选择：v，V，" class="headerlink" title="可视化选择：v，V，&lt;C-v&gt;"></a>可视化选择：<code>v</code>，<code>V</code>，<code>&lt;C-v&gt;</code></h3><p>前面，我们看到了<code>&lt;C-v&gt;</code>的示例（在 Windows 下应该是<code>&lt;C-q&gt;</code>），我们可以使用<code>v</code>和<code>V</code>。一旦被选好了，你可以做下面的事：</p>
+<ul>
+<li><code>J</code> -&gt; 把所有的行连接起来（变成一行）</li>
+<li><code>&lt;</code>或<code>&gt;</code> -&gt; 左右缩进</li>
+<li><code>=</code> -&gt; 自动给缩进</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../images/articles/vim/autoindent.gif"
+                      alt="autoindent"
+                ></p>
+<p>在所有被选择的行后加上点东西：</p>
+<ul>
+<li><code>&lt;C-v&gt;</code></li>
+<li>选中相关的行（可使用<code>j</code>或<code>&lt;C-d&gt;</code>或是<code>/pattern</code>或是<code>%</code>等）</li>
+<li><code>$</code>到行最后</li>
+<li><code>A</code>，输入字符串，按<code>ESC</code>。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../images/articles/vim/append-to-many-lines.gif"
+                      alt="append-to-many-lines"
+                ></p>
+<h3 id="分屏：-split和vsplit"><a href="#分屏：-split和vsplit" class="headerlink" title="分屏：:split和vsplit"></a>分屏：<code>:split</code>和<code>vsplit</code></h3><p>下面是主要的命令，你可以使用 Vim 的帮助<code>:help split</code>。</p>
+<blockquote>
+<ul>
+<li><code>:split</code> -&gt; 创建分屏（<code>:vsplit</code>创建垂直分屏）</li>
+<li><code>&lt;C-w&gt;&lt;dir&gt;</code>：dir 就是方向，可以是<code>hjkl</code>中的一个，其用来切换分屏。</li>
+<li><code>&lt;C-w&gt;_</code>（或<code>&lt;C-w&gt;|</code>）：最大化尺寸（<code>&lt;C-w&gt;\</code>垂直分屏）</li>
+<li><code>&lt;C-w&gt;+</code>（或<code>&lt;C-w&gt;-</code>）：增加尺寸</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../images/articles/vim/split.gif"
+                      alt="split"
+                ></p>
+</blockquote>
+<p><strong>文章转载地址</strong>：<a class="link"   target="_blank" rel="noopener" href="https://coolshell.cn/articles/5426.html" >简明VIM练级攻略 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><strong>原文地址</strong>：<a class="link"   target="_blank" rel="noopener" href="https://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/" >Learn Vim Progressively <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> VIM 练级攻略</li>
+        <li><strong>作者:</strong> 冯旭光</li>
+        <li><strong>创建于
+                :</strong> 2024-09-20 09:33:13</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-03-11 14:43:46
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://blog.fengxuguang.top/posts/70f07f5e/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/vim/">#vim</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/posts/8f03cf8e/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Mybatis源码分析-项目目录</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/posts/3c9f261d/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Maven插件之git-commit-id-plugin</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="gitalk-container"></div>
+    <script data-swup-reload-script
+            src="//cdn.staticfile.org/gitalk/1.8.0/gitalk.min.js"></script>
+    <script data-swup-reload-script>
+
+        function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+                Gitalk && new Gitalk({
+                    clientID: '7155294f872e0ee349f7',
+                    clientSecret: '7298fd2636737cb5ef1bf2f76b08bfbfa1410f83',
+                    repo: 'xuguang.github.io',
+                    owner: 'fengxuguang',
+                    admin: ['fengxuguang'],
+                    id: __gitalk__pathname,
+                    language: 'zh-CN',
+                    proxy: 'https://github.com/login/oauth/access_token'
+                }).render('gitalk-container');
+
+            } catch (e) {
+                window.Gitalk = null;
+            }
+        }
+
+        if ('true') {
+            const loadGitalkTimeout = setTimeout(() => {
+                loadGitalk();
+                clearTimeout(loadGitalkTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+        }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">VIM 练级攻略</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%AD%98%E6%B4%BB"><span class="nav-text">第一章 - 存活</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%84%9F%E8%A7%89%E8%89%AF%E5%A5%BD"><span class="nav-text">第二章 - 感觉良好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%BA%A7-%E6%9B%B4%E5%A5%BD%EF%BC%8C%E6%9B%B4%E5%BC%BA%EF%BC%8C%E6%9B%B4%E5%BF%AB"><span class="nav-text">第三级 - 更好，更强，更快</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%A5%BD"><span class="nav-text">更好</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%BC%BA"><span class="nav-text">更强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%BF%AB"><span class="nav-text">更快</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%BA%A7-Vim-%E8%B6%85%E8%83%BD%E5%8A%9B"><span class="nav-text">第四级 - Vim 超能力</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E5%9F%9F%E9%80%89%E6%8B%A9a%E6%88%96i"><span class="nav-text">区域选择&lt;action&gt;a&lt;object&gt;或&lt;action&gt;i&lt;object&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%97%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="nav-text">块操作：&lt;C-v&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%8F%90%E7%A4%BA%EF%BC%9A%E5%92%8C"><span class="nav-text">自动提示：&lt;C-n&gt;和&lt;C-p&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8F%E5%BD%95%E5%88%B6%EF%BC%9Aqa%E6%93%8D%E4%BD%9C%E5%BA%8F%E5%88%97q-a%EF%BC%8C"><span class="nav-text">宏录制：qa操作序列q,@a，@@</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E9%80%89%E6%8B%A9%EF%BC%9Av%EF%BC%8CV%EF%BC%8C"><span class="nav-text">可视化选择：v，V，&lt;C-v&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B1%8F%EF%BC%9A-split%E5%92%8Cvsplit"><span class="nav-text">分屏：:split和vsplit</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">冯旭光</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 41 篇文章
+                    </span>
+                    
+                        <span>
+                            共 33.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/Swup.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupSlideTheme.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupScriptsPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupProgressPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupScrollPlugin.min.js"></script><script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/SwupPreloadPlugin.min.js"></script>
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+<script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/imageViewer.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/utils.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/main.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/navbarShrink.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/scrollTopBottom.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/lightDarkSwitch.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/categoryList.js"></script>
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/localSearch.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/codeBlock.js"></script>
+
+
+
+    <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/lazyload.js"></script>
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/runtime.js"></script>
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/odometer.min.js"></script>
+    <link rel="stylesheet" href="//evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/assets/odometer-theme-minimal.css">
+
+
+
+  <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/Typed.min.js"></script>
+  <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+    <script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/anime.min.js"></script>
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        <script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/tools/tocToggle.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/layouts/toc.js"></script><script type="module" src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/plugins/tabs.js"></script>
+    
+</div>
+
+
+    <div id="aplayer"></div>
+<script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/libs/APlayer.min.js"></script>
+<script src="https://evan.beee.top/projects/hexo-theme-redefine@2.6.1/source/js/plugins/aplayer.js"></script>
+
+</body>
+</html>
