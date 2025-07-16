@@ -17,22 +17,22 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://blog.fengxuguang.top/posts/610bdf07/"/>
+    <link rel="canonical" href="https://blog.fengxuguang.top/posts/280966a6/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="通用型   说明 快捷键    复制 ctrl + c   粘贴 ctrl +v   剪切 ctrl + x   撤销 ctrl + z   反撤销 ctrl + shift + z   保存 ctrl + s   全选 ctrl + a   提高编写速度   说明 快捷键    智能提示 alt + enter   提示代码模板 ctrl + j   使用 xx 块环绕 ctrl + alt +">
+        <meta name="description" content="1、什么是 Double write Buffer​	Doublewrite Buffer 是 MySQL 数据库中 InnoDB 存储引擎的一种机制，用于解决部分写失效的问题，提高数据完整性和可靠性。Doublewrite Buffer 是内存 + 磁盘的结构，包括内存结构和磁盘结构两个部分。  在内存结构中，Doublewrite Buffer 由 128 个页（Page）构成，大小是 2MB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IDEA快捷键">
-<meta property="og:url" content="https://blog.fengxuguang.top/posts/610bdf07/index.html">
+<meta property="og:title" content="MySQL双写缓冲区（Doublewrite Buffer）深入解析">
+<meta property="og:url" content="https://blog.fengxuguang.top/posts/280966a6/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="通用型   说明 快捷键    复制 ctrl + c   粘贴 ctrl +v   剪切 ctrl + x   撤销 ctrl + z   反撤销 ctrl + shift + z   保存 ctrl + s   全选 ctrl + a   提高编写速度   说明 快捷键    智能提示 alt + enter   提示代码模板 ctrl + j   使用 xx 块环绕 ctrl + alt +">
+<meta property="og:description" content="1、什么是 Double write Buffer​	Doublewrite Buffer 是 MySQL 数据库中 InnoDB 存储引擎的一种机制，用于解决部分写失效的问题，提高数据完整性和可靠性。Doublewrite Buffer 是内存 + 磁盘的结构，包括内存结构和磁盘结构两个部分。  在内存结构中，Doublewrite Buffer 由 128 个页（Page）构成，大小是 2MB">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-02-08T13:23:03.000Z">
-<meta property="article:modified_time" content="2025-03-11T06:43:46.002Z">
+<meta property="article:published_time" content="2025-07-11T02:56:55.000Z">
+<meta property="article:modified_time" content="2025-07-16T01:18:25.791Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="idea">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
     
     
@@ -45,7 +45,7 @@
     
     <title>
         
-            IDEA快捷键 -
+            MySQL双写缓冲区（Doublewrite Buffer）深入解析 -
         
         冯旭光的博客
     </title>
@@ -346,7 +346,7 @@
         <div class="article-title relative w-full">
             
                 <div class="w-full flex items-center pt-6 justify-start">
-                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">IDEA快捷键</h1>
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">MySQL双写缓冲区（Doublewrite Buffer）深入解析</h1>
                 </div>
             
             </div>
@@ -367,35 +367,19 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2024-02-08 21:23:03</span>
-        <span class="mobile">2024-02-08 21:23:03</span>
+        <span class="desktop">2025-07-11 10:56:55</span>
+        <span class="mobile">2025-07-11 10:56:55</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-03-11 14:43:46</span>
-            <span class="mobile">2025-03-11 14:43:46</span>
+            <span class="desktop">2025-07-16 09:18:25</span>
+            <span class="mobile">2025-07-16 09:18:25</span>
             <span class="hover-info">更新</span>
         </span>
     
 
-    
-        <span class="article-categories article-meta-item">
-            <i class="fa-regular fa-folders"></i>&nbsp;
-            <ul>
-                
-                
-                    
-                        
-                        <li>
-                            <a href="/categories/idea/">idea</a>&nbsp;
-                        </li>
-                    
-                    
-                
-            </ul>
-        </span>
     
     
         <span class="article-tags article-meta-item">
@@ -403,7 +387,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/idea/">idea</a>&nbsp;
+                        <a href="/tags/mysql/">mysql</a>&nbsp;
                     </li>
                 
             </ul>
@@ -413,12 +397,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>571 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.3k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fa-regular fa-clock"></i>&nbsp;<span>2 分钟</span>
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>4 分钟</span>
         </span>
     
     
@@ -437,246 +421,35 @@
 
 
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-            <h1 id="通用型"><a href="#通用型" class="headerlink" title="通用型"></a>通用型</h1><table>
-<thead>
-<tr>
-<th>说明</th>
-<th>快捷键</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>复制</td>
-<td>ctrl + c</td>
-</tr>
-<tr>
-<td>粘贴</td>
-<td>ctrl +v</td>
-</tr>
-<tr>
-<td>剪切</td>
-<td>ctrl + x</td>
-</tr>
-<tr>
-<td>撤销</td>
-<td>ctrl + z</td>
-</tr>
-<tr>
-<td>反撤销</td>
-<td>ctrl + shift + z</td>
-</tr>
-<tr>
-<td>保存</td>
-<td>ctrl + s</td>
-</tr>
-<tr>
-<td>全选</td>
-<td>ctrl + a</td>
-</tr>
-</tbody></table>
-<h1 id="提高编写速度"><a href="#提高编写速度" class="headerlink" title="提高编写速度"></a>提高编写速度</h1><table>
-<thead>
-<tr>
-<th>说明</th>
-<th>快捷键</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>智能提示</td>
-<td>alt + enter</td>
-</tr>
-<tr>
-<td>提示代码模板</td>
-<td>ctrl + j</td>
-</tr>
-<tr>
-<td>使用 xx 块环绕</td>
-<td>ctrl + alt + t</td>
-</tr>
-<tr>
-<td>调出生成 getter&#x2F;setter 构造器等结构</td>
-<td>alt + insert</td>
-</tr>
-<tr>
-<td>自动生成返回值变量</td>
-<td>ctrl + alt + v</td>
-</tr>
-<tr>
-<td>复制指定行的代码</td>
-<td>ctrl + d</td>
-</tr>
-<tr>
-<td>删除指定行的代码</td>
-<td>ctrl + y</td>
-</tr>
-<tr>
-<td>切换到下一行代码空位</td>
-<td>shift + enter</td>
-</tr>
-<tr>
-<td>切换到上一行代码空位</td>
-<td>ctrl + alt + enter</td>
-</tr>
-<tr>
-<td>向上移动代码</td>
-<td>ctrl + shift + ↑</td>
-</tr>
-<tr>
-<td>方法形参列表提醒</td>
-<td>ctrl + p</td>
-</tr>
-<tr>
-<td>批量修改指定的变量名、方法名、类名等</td>
-<td>shift + f6</td>
-</tr>
-<tr>
-<td>抽取代码重构方法</td>
-<td>ctrl + alt + m</td>
-</tr>
-<tr>
-<td>重新父类的方法</td>
-<td>ctrl + o</td>
-</tr>
-<tr>
-<td>实现接口的方法</td>
-<td>ctrl + i</td>
-</tr>
-<tr>
-<td>选中的结构的大小写切换</td>
-<td>ctrl + shift + u</td>
-</tr>
-<tr>
-<td>批量导包</td>
-<td>ctrl + alt + o</td>
-</tr>
-</tbody></table>
-<h1 id="类结构、查找和查看源码"><a href="#类结构、查找和查看源码" class="headerlink" title="类结构、查找和查看源码"></a>类结构、查找和查看源码</h1><table>
-<thead>
-<tr>
-<th>说明</th>
-<th>快捷键</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>如何查看源码</td>
-<td>ctrl + 选中指定的结构 或 ctrl + n</td>
-</tr>
-<tr>
-<td>显示当前类结构，支持搜索指定的方法、属性等</td>
-<td>ctrl + f12</td>
-</tr>
-<tr>
-<td>退回到前一个编辑的页面</td>
-<td>ctrl + alt + ←</td>
-</tr>
-<tr>
-<td>进入到下一个编辑的页面</td>
-<td>ctrl + alt + →</td>
-</tr>
-<tr>
-<td>打开的类文件之间切换</td>
-<td>alt + ←&#x2F;→</td>
-</tr>
-<tr>
-<td>光标选中指定的类，查看继承树结构</td>
-<td>ctrl + h</td>
-</tr>
-<tr>
-<td>查看方法文档</td>
-<td>ctrl + q</td>
-</tr>
-<tr>
-<td>类的 UML 关系图</td>
-<td>ctrl + alt + u</td>
-</tr>
-<tr>
-<td>定位某行</td>
-<td>ctrl + g</td>
-</tr>
-<tr>
-<td>回溯变量或方法的来源</td>
-<td>ctrl + alt + b</td>
-</tr>
-<tr>
-<td>折叠方法实现</td>
-<td>ctrl + shift + -</td>
-</tr>
-<tr>
-<td>展开方法实现</td>
-<td>ctrl + shift + +</td>
-</tr>
-<tr>
-<td>查看类的继承</td>
-<td>ctrl + h</td>
-</tr>
-</tbody></table>
-<h1 id="查找、替换与关闭"><a href="#查找、替换与关闭" class="headerlink" title="查找、替换与关闭"></a>查找、替换与关闭</h1><table>
-<thead>
-<tr>
-<th>说明</th>
-<th>快捷键</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>查找指定的结构</td>
-<td>ctrl + f</td>
-</tr>
-<tr>
-<td>快速查找：选中的 word 快速定位到下一个</td>
-<td>ctrl + I</td>
-</tr>
-<tr>
-<td>查找与替换</td>
-<td>ctrl + r</td>
-</tr>
-<tr>
-<td>直接定位到当前行的首位</td>
-<td>home</td>
-</tr>
-<tr>
-<td>直接定位到当前行的末尾</td>
-<td>end</td>
-</tr>
-<tr>
-<td>查找当前元素在当前文件中的引用，然后按 F3 可以选择</td>
-<td>ctrl + f7</td>
-</tr>
-<tr>
-<td>全项目搜索文本</td>
-<td>ctrl + shift + f</td>
-</tr>
-<tr>
-<td>关闭当前窗口</td>
-<td>ctrl + f4</td>
-</tr>
-</tbody></table>
-<h1 id="调整格式"><a href="#调整格式" class="headerlink" title="调整格式"></a>调整格式</h1><table>
-<thead>
-<tr>
-<th>说明</th>
-<th>快捷键</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>格式化代码</td>
-<td>ctrl + alt + l</td>
-</tr>
-<tr>
-<td>使用单行注释</td>
-<td>ctrl + &#x2F;</td>
-</tr>
-<tr>
-<td>使用 &#x2F; 取消多行注释</td>
-<td>ctrl + shift + &#x2F;</td>
-</tr>
-<tr>
-<td>选择数行，整体往后移动</td>
-<td>tab</td>
-</tr>
-<tr>
-<td>选中数行，整体往前移动</td>
-<td>shift + tab</td>
-</tr>
-</tbody></table>
+            <h2 id="1、什么是-Double-write-Buffer"><a href="#1、什么是-Double-write-Buffer" class="headerlink" title="1、什么是 Double write Buffer"></a>1、什么是 Double write Buffer</h2><p>​	Doublewrite Buffer 是 MySQL 数据库中 InnoDB 存储引擎的一种机制，用于解决部分写失效的问题，提高数据完整性和可靠性。Doublewrite Buffer 是内存 + 磁盘的结构，包括内存结构和磁盘结构两个部分。</p>
+<ul>
+<li>在内存结构中，Doublewrite Buffer 由 128 个页（Page）构成，大小是 2MB（128*16KB）。这些页在内存中以 Doublewrite Buffer 的形式存在。</li>
+<li>在磁盘结构中，Doublewrite Buffer 在系统表空间上是 128 个页（2个区，extend1 和 extend2），大小也是 2MB。这些页在磁盘上以 Doublewrite File 的形式存在。</li>
+</ul>
+<p>Doublewrite Buffer 的原理是在将数据页写到数据文件之前，先将它们写入 Doublewrite Buffer 的共享表空间内。在完成写入 Doublewrite Buffer 后，再将数据页写入到数据文件的适当位置。这种方式可以确保数据的一致性和完整性，因为在写入过程中发生意外崩溃时，可以从 Doublewrite Buffer 中找到完好的数据页副本用于恢复。</p>
+<p>![image-20250715103633520](..&#x2F;..&#x2F;images&#x2F;articles&#x2F;mysql&#x2F;doublewrite buffer.png)</p>
+<p>​	当有数据页要被写入数据文件时，首先将页数据通过 memcpy 函数拷贝至内存中的 Doublewrite Buffer中。然后，Doublewrite Buffer 的内存中的数据页会刷写到 Doublewrite Buffer 的磁盘上，分两次写入磁盘共享表空间中（连续存储，顺序写，性能很高），每次写 1MB。完成 Doublewrite 页的写入之后，再将内存中的 Doublewrite Buffer 中的页写入到自己的表空间文件中。</p>
+<p>​	通过这种方式，至少在两次写操作中，数据文件和 Doublewrite Buffer 文件中至少有一份数据是正确无误的。如果写磁盘过程发生了崩溃，那么 MySQL 重启时可以通过校验和来确认是否有错误数据，如果 Doublewrite Buffer 文件错误了，就从数据文件中拉取原始数据根据 redo log 得出正确的目标数据，而如果数据文件错误了，则将 Doublewrite Buffer 中的数据重新写入数据文件。</p>
+<h2 id="2、Doublewrite-Buffer-工作流程"><a href="#2、Doublewrite-Buffer-工作流程" class="headerlink" title="2、Doublewrite Buffer 工作流程"></a>2、Doublewrite Buffer 工作流程</h2><ol>
+<li><strong>写操作触发：</strong>当执行 INSERT、UPDATE 或 DELETE 等写操作时，MySQL 首先将数据写入双写缓冲区。</li>
+<li><strong>同步到 Doublewrite File：</strong>随后，双写缓冲区中的数据被同步（flush）到 Doublewrite File 中。这个过程是由后台线程完成的，以确保数据的持久性。</li>
+<li><strong>实际数据写入：</strong>一旦 Doublewrite File 中的数据被确认已经写入磁盘，MySQL 就可以将这些数据写入实际的数据文件中。</li>
+<li><strong>恢复机制：</strong>如果在写操作过程中发生故障，MySQL 可以从 Doublewrite File 中恢复数据。由于 Doublewrite File 中的数据是完整的，因此可以用来修复损坏的数据文件，确保数据的完整性和一致性。</li>
+</ol>
+<h2 id="3、为什么需要-Doublewrite-Buffer"><a href="#3、为什么需要-Doublewrite-Buffer" class="headerlink" title="3、为什么需要 Doublewrite Buffer"></a>3、为什么需要 Doublewrite Buffer</h2><p>​	从 MySQL 页（Page）和 Linux 页大小不同的角度来看，需要 Doublewrite Buffer 的原因主要是为了解决数据写入过程中的一致性和完整性问题。</p>
+<p>​	首先，我们需要了解 MySQL 的页和 Linux 的页大小不同。MySQL 的页通常大小为 16KB，而 Linux 的页大小可能因系统配置而有所不同，但常见的默认大小是 4KB。这意味着，当 MySQL 写入一个页的数据时，实际上是写入了一个更大的块，这个块可能跨越了多个 Linux 页。</p>
+<p><strong>考虑以下场景：</strong></p>
+<p>​	假设 MySQL 正在写入一个页的数据，并且这个操作只完成了部分，比如只写了 50% 的数据。在这种情况下，如果直接将这个不完整的数据页写入数据文件，那么数据文件就会处于一个不一致的状态。某些查询可能会读取到这个不完整的数据页，导致数据损坏或不一致。</p>
+<p>​	为了解决这个问题，Doublewrite Buffer 被引入。当 MySQL 写入一个数据页时，首先会将整个页写入 Doublewrite Buffer。这样，即使写操作只完成了部分，Doublewrite Buffer 中的数据仍然是完整的。然后，Doublewrite Buffer 中的数据再被同步（flush）到实际的数据文件中。这样，即使发生故障，也可以从 Doublewrite Buffer 中恢复数据，确保数据的完整性和一致性。</p>
+<blockquote>
+<p>综上所述，Doublewrite Buffer 的存在是为了解决由于 MySQL 页和 Linux 页大小不同导致的数据写入过程中的一致性和完整性问题。通过将数据先写入 Doublewrite Buffer，然后再同步到实际的数据文件，可以确保数据的完整性和一致性，避免因故障导致的数据损坏或不一致问题。</p>
+</blockquote>
+<h2 id="4、Doublewrite-Buffer-的参数"><a href="#4、Doublewrite-Buffer-的参数" class="headerlink" title="4、Doublewrite Buffer 的参数"></a>4、Doublewrite Buffer 的参数</h2><p>MySQL 的双写缓冲区可以通过以下参数进行配置：</p>
+<ul>
+<li><strong>innodb_doublewrite：</strong>控制是否启用双写缓冲区的参数。可以设置为 ON 或 OFF。默认为 ON。</li>
+<li><strong>innodb_doublewrite_file：</strong>指定 Doublewrite File 的路径和文件名。默认值为 ib_logfile0 和 ib_logfile1。</li>
+<li><strong>innodb_doublewrite_buffer_size：</strong>控制双写缓冲区大小的参数。默认值是 256KB。可以根据需要进行调整，但不应设置得过大或过小，以免影响系统性能或导致不必要的内存占用。</li>
+</ul>
 
         </div>
 
@@ -684,18 +457,18 @@
             <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> IDEA快捷键</li>
+        <li><strong>标题:</strong> MySQL双写缓冲区（Doublewrite Buffer）深入解析</li>
         <li><strong>作者:</strong> 冯旭光</li>
         <li><strong>创建于
-                :</strong> 2024-02-08 21:23:03</li>
+                :</strong> 2025-07-11 10:56:55</li>
         
             <li>
                 <strong>更新于
-                    :</strong> 2025-03-11 14:43:46
+                    :</strong> 2025-07-16 09:18:25
             </li>
         
         <li>
-            <strong>链接:</strong> https://blog.fengxuguang.top/posts/610bdf07/
+            <strong>链接:</strong> https://blog.fengxuguang.top/posts/280966a6/
         </li>
         <li>
             <strong>
@@ -717,7 +490,7 @@
             <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
                 
                     <li class="tag-item mx-0.5">
-                        <a href="/tags/idea/">#idea</a>&nbsp;
+                        <a href="/tags/mysql/">#mysql</a>&nbsp;
                     </li>
                 
             </ul>
@@ -728,29 +501,14 @@
         
             <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
                 
-                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-                        <a class="prev"
-                        rel="prev"
-                        href="/posts/ee5b4d8/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">Lombok语法</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
                         <a class="next"
                         rel="next"
-                        href="/posts/b1e2d9f1/"
+                        href="/posts/5341e1d9/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">SpringBootApplication注解</span>
+                                <span class="post-nav-title-item">MySQL Semi Join(半连接)解析</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -829,8 +587,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">IDEA快捷键</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%9E%8B"><span class="nav-text">通用型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E7%BC%96%E5%86%99%E9%80%9F%E5%BA%A6"><span class="nav-text">提高编写速度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E7%BB%93%E6%9E%84%E3%80%81%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9F%A5%E7%9C%8B%E6%BA%90%E7%A0%81"><span class="nav-text">类结构、查找和查看源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E3%80%81%E6%9B%BF%E6%8D%A2%E4%B8%8E%E5%85%B3%E9%97%AD"><span class="nav-text">查找、替换与关闭</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E6%A0%BC%E5%BC%8F"><span class="nav-text">调整格式</span></a></li></ol>
+        <div class="page-title">MySQL双写缓冲区（Doublewrite Buffer）深入解析</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-Double-write-Buffer"><span class="nav-text">1、什么是 Double write Buffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81Doublewrite-Buffer-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-text">2、Doublewrite Buffer 工作流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-Doublewrite-Buffer"><span class="nav-text">3、为什么需要 Doublewrite Buffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81Doublewrite-Buffer-%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-text">4、Doublewrite Buffer 的参数</span></a></li></ol>
 
     </div>
 </div>

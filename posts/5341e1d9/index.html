@@ -30,7 +30,7 @@
 <meta property="og:description" content="​	Semi Join(半连接)是 MySQL 优化子查询执行的核心技术之一，它通过特殊算法只检查存在性而不获取完整的结果集，显著提升了包含子查询的 SQL 性能。下面我将从多个维度深入剖析 Semi Join 的原理与实现。 一、Semi Join 的本质特征1.存在性检查  只判断外层表行是否在子查询结果集中存在匹配 不关心匹配数量（1次或多次都视为存在） 不获取子查询的任何实际数据  2.结">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-07-07T02:04:23.000Z">
-<meta property="article:modified_time" content="2025-07-09T02:28:20.703Z">
+<meta property="article:modified_time" content="2025-07-09T03:00:17.234Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
@@ -320,7 +320,7 @@
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">41</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">42</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -374,8 +374,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-07-09 10:28:20</span>
-            <span class="mobile">2025-07-09 10:28:20</span>
+            <span class="desktop">2025-07-09 11:17</span>
+            <span class="mobile">2025-07-09 11:17</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -437,13 +437,17 @@
 <div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 常规 INNER JOIN （会返回两表匹配行）</span></span><br><span class="line"><span class="keyword">SELECT</span> o.<span class="operator">*</span> <span class="keyword">FROM</span> orders o <span class="keyword">INNER</span> <span class="keyword">JOIN</span> customers c <span class="keyword">ON</span> c.ID <span class="operator">=</span> o.CUST_ID;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Semi Join（只检查存在性）</span></span><br><span class="line"><span class="keyword">SELECT</span> o.<span class="operator">*</span> <span class="keyword">FROM</span> orders o <span class="keyword">WHERE</span> o.CUST_ID <span class="keyword">IN</span> (<span class="keyword">SELECT</span> id <span class="keyword">FROM</span> customers);</span><br></pre></td></tr></table></figure></div>
 
 <h2 id="二、Semi-Join-的触发场景"><a href="#二、Semi-Join-的触发场景" class="headerlink" title="二、Semi Join 的触发场景"></a>二、Semi Join 的触发场景</h2><h3 id="1-语法形式触发"><a href="#1-语法形式触发" class="headerlink" title="1. 语法形式触发"></a>1. 语法形式触发</h3><ul>
-<li><p>IN 子查询：</p>
-<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A <span class="keyword">WHERE</span> x <span class="keyword">IN</span> (<span class="keyword">SELECT</span> y <span class="keyword">FROM</span> B);</span><br></pre></td></tr></table></figure></div></li>
-<li><p>EXISTS 子查询：</p>
+<li>IN 子查询：</li>
+</ul>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A <span class="keyword">WHERE</span> x <span class="keyword">IN</span> (<span class="keyword">SELECT</span> y <span class="keyword">FROM</span> B);</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>EXISTS 子查询：</li>
+</ul>
 <div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A <span class="keyword">WHERE</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> <span class="number">1</span> <span class="keyword">FROM</span> B <span class="keyword">WHERE</span> B.y <span class="operator">=</span> A.x);</span><br></pre></td></tr></table></figure></div>
-</li>
-<li><p>某些比较操作：</p>
-</li>
+
+<ul>
+<li>某些比较操作：</li>
 </ul>
 <div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A <span class="keyword">WHERE</span> x <span class="operator">&gt;</span> <span class="keyword">ALL</span> (<span class="keyword">SELECT</span> y <span class="keyword">FROM</span> B);</span><br></pre></td></tr></table></figure></div>
 
@@ -559,7 +563,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2025-07-09 10:28:20
+                    :</strong> 2025-07-09 11:00:17
             </li>
         
         <li>
@@ -595,6 +599,21 @@
 
         
             <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="prev"
+                        rel="prev"
+                        href="/posts/280966a6/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">MySQL双写缓冲区（Doublewrite Buffer）深入解析</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
@@ -716,11 +735,11 @@
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        共 41 篇文章
+                        共 42 篇文章
                     </span>
                     
                         <span>
-                            共 33.3k 字
+                            共 34.6k 字
                         </span>
                     
                 </p>
